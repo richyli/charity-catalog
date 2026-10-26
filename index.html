@@ -358,8 +358,8 @@ function radioQ(k, text, opts){
 }
 function buildSurvey(){
   const blocks = [];
-  blocks.push(`<div class="q"><div class="qt" style="font-weight:400;color:var(--muted)">以下每一題，往左或往右拖動，表示你的看法與強度；0 是沒有意見。</div></div>`);
-  shuffle(C.survey.sliders).forEach(s => blocks.push(`<div class="q" data-k="q_${s.key}"><div class="qt">${s.text}</div>
+  blocks.push(`<div class="q"><div class="qt" style="font-weight:400;color:var(--muted)">以下每一題，往左或往右拖動，表示你的看法與強度；0 是中間。</div></div>`);
+  shuffle(C.survey.sliders).forEach(s => blocks.push(`<div class="q" data-k="q_${s.key}" data-mid="${s.mid || "沒有意見"}"><div class="qt">${s.text}</div>
     <div class="scale"><span>${s.left}</span><input type="range" min="-3" max="3" step="1" value="0" data-touched="0"><span class="r">${s.right}</span></div>
     <div class="val">請拖動滑桿（−3 到 +3）</div></div>`));
   C.survey.radios.forEach(r => blocks.push(radioQ(r.key, r.text, r.opts)));
@@ -368,7 +368,7 @@ function buildSurvey(){
     const mark = () => {
       r.dataset.touched = "1"; r.closest(".q").classList.remove("missing");
       const v = +r.value;
-      r.closest(".q").querySelector(".val").textContent = v > 0 ? "+" + v : (v === 0 ? "0（沒有意見）" : String(v));
+      r.closest(".q").querySelector(".val").textContent = v > 0 ? "+" + v : (v === 0 ? `0（${r.closest(".q").dataset.mid}）` : String(v));
     };
     ["input", "change", "pointerdown", "keydown"].forEach(ev => r.addEventListener(ev, mark));
   });
