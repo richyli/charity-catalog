@@ -7,7 +7,12 @@
   "orientation": "front",
   "maskable": false,
   "variants": {
-   "none": "child2_cartoon_front__none.jpg"
+   "sad": {
+    "none": "child2_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "child2_cartoon_front__smile__none.jpg"
+   }
   }
  },
  {
@@ -18,9 +23,16 @@
   "orientation": "front",
   "maskable": true,
   "variants": {
-   "none": "child2_painting_front__none.jpg",
-   "eye": "child2_painting_front__eye.jpg",
-   "blur": "child2_painting_front__blur.jpg"
+   "sad": {
+    "none": "child2_painting_front__sad__none.jpg",
+    "eye": "child2_painting_front__sad__eye.jpg",
+    "blur": "child2_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "child2_painting_front__smile__none.jpg",
+    "eye": "child2_painting_front__smile__eye.jpg",
+    "blur": "child2_painting_front__smile__blur.jpg"
+   }
   }
  },
  {
@@ -31,9 +43,16 @@
   "orientation": "front",
   "maskable": true,
   "variants": {
-   "none": "child2_photo_front__none.jpg",
-   "eye": "child2_photo_front__eye.jpg",
-   "blur": "child2_photo_front__blur.jpg"
+   "sad": {
+    "none": "child2_photo_front__sad__none.jpg",
+    "eye": "child2_photo_front__sad__eye.jpg",
+    "blur": "child2_photo_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "child2_photo_front__smile__none.jpg",
+    "eye": "child2_photo_front__smile__eye.jpg",
+    "blur": "child2_photo_front__smile__blur.jpg"
+   }
   }
  },
  {
@@ -44,7 +63,12 @@
   "orientation": "front",
   "maskable": false,
   "variants": {
-   "none": "child_cartoon_front__none.jpg"
+   "sad": {
+    "none": "child_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "child_cartoon_front__smile__none.jpg"
+   }
   }
  },
  {
@@ -55,9 +79,16 @@
   "orientation": "side",
   "maskable": true,
   "variants": {
-   "none": "child_painting_side__none.jpg",
-   "eye": "child_painting_side__eye.jpg",
-   "blur": "child_painting_side__blur.jpg"
+   "sad": {
+    "none": "child_painting_side__sad__none.jpg",
+    "eye": "child_painting_side__sad__eye.jpg",
+    "blur": "child_painting_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "child_painting_side__smile__none.jpg",
+    "eye": "child_painting_side__smile__eye.jpg",
+    "blur": "child_painting_side__smile__blur.jpg"
+   }
   }
  },
  {
@@ -68,9 +99,16 @@
   "orientation": "front",
   "maskable": true,
   "variants": {
-   "none": "child_photo_front__none.jpg",
-   "eye": "child_photo_front__eye.jpg",
-   "blur": "child_photo_front__blur.jpg"
+   "sad": {
+    "none": "child_photo_front__sad__none.jpg",
+    "eye": "child_photo_front__sad__eye.jpg",
+    "blur": "child_photo_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "child_photo_front__smile__none.jpg",
+    "eye": "child_photo_front__smile__eye.jpg",
+    "blur": "child_photo_front__smile__blur.jpg"
+   }
   }
  },
  {
@@ -81,7 +119,12 @@
   "orientation": "front",
   "maskable": false,
   "variants": {
-   "none": "dog2_cartoon_front__none.jpg"
+   "sad": {
+    "none": "dog2_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "dog2_cartoon_front__smile__none.jpg"
+   }
   }
  },
  {
@@ -92,9 +135,16 @@
   "orientation": "front",
   "maskable": true,
   "variants": {
-   "none": "dog2_painting_front__none.jpg",
-   "eye": "dog2_painting_front__eye.jpg",
-   "blur": "dog2_painting_front__blur.jpg"
+   "sad": {
+    "none": "dog2_painting_front__sad__none.jpg",
+    "eye": "dog2_painting_front__sad__eye.jpg",
+    "blur": "dog2_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog2_painting_front__smile__none.jpg",
+    "eye": "dog2_painting_front__smile__eye.jpg",
+    "blur": "dog2_painting_front__smile__blur.jpg"
+   }
   }
  },
  {
@@ -105,9 +155,16 @@
   "orientation": "side",
   "maskable": true,
   "variants": {
-   "none": "dog2_photo_side__none.jpg",
-   "eye": "dog2_photo_side__eye.jpg",
-   "blur": "dog2_photo_side__blur.jpg"
+   "sad": {
+    "none": "dog2_photo_side__sad__none.jpg",
+    "eye": "dog2_photo_side__sad__eye.jpg",
+    "blur": "dog2_photo_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog2_photo_side__smile__none.jpg",
+    "eye": "dog2_photo_side__smile__eye.jpg",
+    "blur": "dog2_photo_side__smile__blur.jpg"
+   }
   }
  },
  {
@@ -118,7 +175,12 @@
   "orientation": "side",
   "maskable": false,
   "variants": {
-   "none": "dog_cartoon_side__none.jpg"
+   "sad": {
+    "none": "dog_cartoon_side__sad__none.jpg"
+   },
+   "smile": {
+    "none": "dog_cartoon_side__smile__none.jpg"
+   }
   }
  },
  {
@@ -129,9 +191,16 @@
   "orientation": "side",
   "maskable": true,
   "variants": {
-   "none": "dog_painting_side__none.jpg",
-   "eye": "dog_painting_side__eye.jpg",
-   "blur": "dog_painting_side__blur.jpg"
+   "sad": {
+    "none": "dog_painting_side__sad__none.jpg",
+    "eye": "dog_painting_side__sad__eye.jpg",
+    "blur": "dog_painting_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog_painting_side__smile__none.jpg",
+    "eye": "dog_painting_side__smile__eye.jpg",
+    "blur": "dog_painting_side__smile__blur.jpg"
+   }
   }
  },
  {
@@ -142,9 +211,16 @@
   "orientation": "front",
   "maskable": true,
   "variants": {
-   "none": "dog_photo_front__none.jpg",
-   "eye": "dog_photo_front__eye.jpg",
-   "blur": "dog_photo_front__blur.jpg"
+   "sad": {
+    "none": "dog_photo_front__sad__none.jpg",
+    "eye": "dog_photo_front__sad__eye.jpg",
+    "blur": "dog_photo_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog_photo_front__smile__none.jpg",
+    "eye": "dog_photo_front__smile__eye.jpg",
+    "blur": "dog_photo_front__smile__blur.jpg"
+   }
   }
  },
  {
@@ -155,7 +231,12 @@
   "orientation": "front",
   "maskable": false,
   "variants": {
-   "none": "elder2_cartoon_front__none.jpg"
+   "sad": {
+    "none": "elder2_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "elder2_cartoon_front__smile__none.jpg"
+   }
   }
  },
  {
@@ -166,9 +247,16 @@
   "orientation": "side",
   "maskable": true,
   "variants": {
-   "none": "elder2_painting_side__none.jpg",
-   "eye": "elder2_painting_side__eye.jpg",
-   "blur": "elder2_painting_side__blur.jpg"
+   "sad": {
+    "none": "elder2_painting_side__sad__none.jpg",
+    "eye": "elder2_painting_side__sad__eye.jpg",
+    "blur": "elder2_painting_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder2_painting_side__smile__none.jpg",
+    "eye": "elder2_painting_side__smile__eye.jpg",
+    "blur": "elder2_painting_side__smile__blur.jpg"
+   }
   }
  },
  {
@@ -179,9 +267,16 @@
   "orientation": "front",
   "maskable": true,
   "variants": {
-   "none": "elder2_photo_front__none.jpg",
-   "eye": "elder2_photo_front__eye.jpg",
-   "blur": "elder2_photo_front__blur.jpg"
+   "sad": {
+    "none": "elder2_photo_front__sad__none.jpg",
+    "eye": "elder2_photo_front__sad__eye.jpg",
+    "blur": "elder2_photo_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder2_photo_front__smile__none.jpg",
+    "eye": "elder2_photo_front__smile__eye.jpg",
+    "blur": "elder2_photo_front__smile__blur.jpg"
+   }
   }
  },
  {
@@ -192,7 +287,12 @@
   "orientation": "side",
   "maskable": false,
   "variants": {
-   "none": "elder_cartoon_side__none.jpg"
+   "sad": {
+    "none": "elder_cartoon_side__sad__none.jpg"
+   },
+   "smile": {
+    "none": "elder_cartoon_side__smile__none.jpg"
+   }
   }
  },
  {
@@ -203,9 +303,16 @@
   "orientation": "front",
   "maskable": true,
   "variants": {
-   "none": "elder_painting_front__none.jpg",
-   "eye": "elder_painting_front__eye.jpg",
-   "blur": "elder_painting_front__blur.jpg"
+   "sad": {
+    "none": "elder_painting_front__sad__none.jpg",
+    "eye": "elder_painting_front__sad__eye.jpg",
+    "blur": "elder_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder_painting_front__smile__none.jpg",
+    "eye": "elder_painting_front__smile__eye.jpg",
+    "blur": "elder_painting_front__smile__blur.jpg"
+   }
   }
  },
  {
@@ -216,9 +323,16 @@
   "orientation": "side",
   "maskable": true,
   "variants": {
-   "none": "elder_photo_side__none.jpg",
-   "eye": "elder_photo_side__eye.jpg",
-   "blur": "elder_photo_side__blur.jpg"
+   "sad": {
+    "none": "elder_photo_side__sad__none.jpg",
+    "eye": "elder_photo_side__sad__eye.jpg",
+    "blur": "elder_photo_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder_photo_side__smile__none.jpg",
+    "eye": "elder_photo_side__smile__eye.jpg",
+    "blur": "elder_photo_side__smile__blur.jpg"
+   }
   }
  }
 ]
