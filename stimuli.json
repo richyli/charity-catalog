@@ -370,6 +370,48 @@
   }
  },
  {
+  "id": "child28_painting_front",
+  "category": "child",
+  "individual": "child28",
+  "gender": "female",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "child28_painting_front__sad__none.jpg",
+    "eye": "child28_painting_front__sad__eye.jpg",
+    "blur": "child28_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "child28_painting_front__smile__none.jpg",
+    "eye": "child28_painting_front__smile__eye.jpg",
+    "blur": "child28_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "child29_painting_front",
+  "category": "child",
+  "individual": "child29",
+  "gender": "male",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "child29_painting_front__sad__none.jpg",
+    "eye": "child29_painting_front__sad__eye.jpg",
+    "blur": "child29_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "child29_painting_front__smile__none.jpg",
+    "eye": "child29_painting_front__smile__eye.jpg",
+    "blur": "child29_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
   "id": "child2_cartoon_front",
   "category": "child",
   "individual": "child2",
@@ -425,6 +467,112 @@
     "none": "child2_photo_front__smile__none.jpg",
     "eye": "child2_photo_front__smile__eye.jpg",
     "blur": "child2_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "child31_painting_front",
+  "category": "child",
+  "individual": "child31",
+  "gender": "male",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "child31_painting_front__sad__none.jpg",
+    "eye": "child31_painting_front__sad__eye.jpg",
+    "blur": "child31_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "child31_painting_front__smile__none.jpg",
+    "eye": "child31_painting_front__smile__eye.jpg",
+    "blur": "child31_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "child32_cartoon_front",
+  "category": "child",
+  "individual": "child32",
+  "gender": "female",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "child32_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "child32_cartoon_front__smile__none.jpg"
+   }
+  }
+ },
+ {
+  "id": "child33_cartoon_front",
+  "category": "child",
+  "individual": "child33",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "child33_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "child33_cartoon_front__smile__none.jpg"
+   }
+  }
+ },
+ {
+  "id": "child34_cartoon_side",
+  "category": "child",
+  "individual": "child34",
+  "gender": "female",
+  "style": "cartoon",
+  "orientation": "side",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "child34_cartoon_side__sad__none.jpg"
+   },
+   "smile": {
+    "none": "child34_cartoon_side__smile__none.jpg"
+   }
+  }
+ },
+ {
+  "id": "child35_cartoon_front",
+  "category": "child",
+  "individual": "child35",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "child35_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "child35_cartoon_front__smile__none.jpg"
+   }
+  }
+ },
+ {
+  "id": "child37_cartoon_side",
+  "category": "child",
+  "individual": "child37",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "side",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "child37_cartoon_side__sad__none.jpg"
+   },
+   "smile": {
+    "none": "child37_cartoon_side__smile__none.jpg"
    }
   }
  },
@@ -749,6 +897,23 @@
   }
  },
  {
+  "id": "elder10_cartoon_front",
+  "category": "elder",
+  "individual": "elder10",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "elder10_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "elder10_cartoon_front__smile__none.jpg"
+   }
+  }
+ },
+ {
   "id": "elder2_cartoon_front",
   "category": "elder",
   "individual": "elder2",
@@ -909,6 +1074,44 @@
     "none": "elder7_painting_front__smile__none.jpg",
     "eye": "elder7_painting_front__smile__eye.jpg",
     "blur": "elder7_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder8_painting_side",
+  "category": "elder",
+  "individual": "elder8",
+  "gender": "male",
+  "style": "painting",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder8_painting_side__sad__none.jpg",
+    "eye": "elder8_painting_side__sad__eye.jpg",
+    "blur": "elder8_painting_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder8_painting_side__smile__none.jpg",
+    "eye": "elder8_painting_side__smile__eye.jpg",
+    "blur": "elder8_painting_side__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder9_cartoon_front",
+  "category": "elder",
+  "individual": "elder9",
+  "gender": "female",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "elder9_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "elder9_cartoon_front__smile__none.jpg"
    }
   }
  },
