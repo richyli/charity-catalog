@@ -23,7 +23,8 @@ window.ABI_CONFIG = {
     style: ["photo", "painting", "cartoon"],
     disclosure: ["none", "text-edge", "text-center", "icon-edge", "icon-center"],
     mask: ["none", "eye", "blur"],
-    expression: ["sad", "smile"]   // 2026-10-26 使用者選定；微笑版由同一張圖編輯而來
+    expression: ["sad", "smile"],  // 2026-10-26 使用者選定；微笑版由同一張圖編輯而來
+    gender: ["female", "male"]     // 2026-10-26 使用者選定；只用於人（兒童、長者），動物記為 na
   },
   disclosureText: "AI 生成影像",
   // 專案名稱：句型固定「前半｜後半計畫」，只換可互換的位置；9 種組合語意等值（使用者 2026-10-26）

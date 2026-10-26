@@ -221,21 +221,23 @@ function leastUsed(n, use, exclude){
   use[i] = (use[i] || 0) + 1; exclude.add(i); return i;
 }
 
-function pickImage(cat, style, expr, avoid){
-  const pool = STIM.filter(m => m.category === cat && m.style === style && m.variants[expr] && !avoid.has(m.id));
+function pickImage(cat, style, expr, gender, avoid){
+  const ok = m => m.category === cat && m.variants[expr] && (gender === "na" || m.gender === gender);
+  const pool = STIM.filter(m => ok(m) && m.style === style && !avoid.has(m.id));
   const fresh = pool.filter(m => !S.usedImg.has(m.id));
   let m;
   if (fresh.length) m = pick(fresh);
   else if (pool.length) { m = pick(pool); S.reusedImg++; }
-  else { m = pick(STIM.filter(x => x.category === cat && x.variants[expr] && !avoid.has(x.id))) || pick(STIM.filter(x => x.category === cat && x.variants[expr])); S.reusedImg++; }
+  else { m = pick(STIM.filter(x => ok(x) && !avoid.has(x.id))) || pick(STIM.filter(ok)); S.reusedImg++; }
   S.usedImg.add(m.id); return m;
 }
 function makeCard(cat, style, disclosure, avoid, used){
   const expr = pick(C.levels.expression);
-  const img = pickImage(cat, style, expr, avoid);
+  const gender = cat === "animal" ? "na" : pick(C.levels.gender);
+  const img = pickImage(cat, style, expr, gender, avoid);
   avoid.add(img.id);
   const mask = img.maskable ? pick(C.levels.mask) : "na";
-  return { cat, style: img.style, expr, disclosure, mask, img: img.id,
+  return { cat, gender, style: img.style, expr, disclosure, mask, img: img.id,
            src: "img/" + img.variants[expr][mask === "na" ? "none" : mask],
            title: leastUsed(TITLES.length, S.titleUse, used.t), org: leastUsed(C.orgs.length, S.orgUse, used.o) };
 }
@@ -247,7 +249,7 @@ function makeNormalCards(){
     return makeCard(cat, pick(C.levels.style), d, avoid, used);
   });
 }
-function cardCode(c){ return [c.cat, c.style, c.expr, c.disclosure, c.mask, c.img, "t" + TITLES[c.title].id, "o" + c.org].join("|"); }
+function cardCode(c){ return [c.cat, c.gender, c.style, c.expr, c.disclosure, c.mask, c.img, "t" + TITLES[c.title].id, "o" + c.org].join("|"); }
 
 const SPARK = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></svg>';
 function discHTML(d){
