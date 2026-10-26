@@ -214,7 +214,10 @@ const S = {
 
 let STIM = [];
 const TITLES = [];
-C.titleSlotA.forEach((a, i) => C.titleSlotB.forEach((b, j) => TITLES.push({ id: `${i}${j}`, text: `${a}｜${b}計畫` })));
+(function perm(rest, used){
+  if (!rest.length) { TITLES.push({ id: used.join(""), text: used.map(i => C.titleWords[i]).join("") + "計畫" }); return; }
+  rest.forEach(i => perm(rest.filter(x => x !== i), used.concat(i)));
+})(C.titleWords.map((w, i) => i), []);
 const PERMIT = C.orgs.map((o, i) => "衛部救字第114" + String((i * 7919 + 13579) % 9000000 + 1000000) + "號");
 // 用最少的優先、同頁不重複，讓名稱與屬性獨立且出現次數平均
 function leastUsed(n, use, exclude){
