@@ -25,7 +25,7 @@ window.ABI_CONFIG = {
     discType: ["none", "text", "icon"],
     discPos: ["edge", "center"],
     discSize: ["small", "large"],
-    mask: ["none", "eye", "blur"],
+    mask: ["none", "eye"],          // 2026-10-26 使用者：全臉模糊會蓋掉表情，改為兩水準（blur 圖檔保留但不使用）
     expression: ["sad", "smile"],  // 2026-10-26 使用者選定；微笑版由同一張圖編輯而來
     gender: ["female", "male"]     // 2026-10-26 使用者選定；只用於人（兒童、長者），動物記為 na
   },
