@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>公益捐款平台</title>
+<style>
+:root{
+  --bg:#f4f5f4; --card:#ffffff; --ink:#1f2421; --muted:#6b726e; --line:#e2e5e3;
+  --brand:#0a9a52; --brand-ink:#ffffff; --warn:#b4231a; --chip:#eef7f1;
+  --font:"Inter","Segoe UI","Helvetica Neue",Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+}
+/* 實驗頁固定淺色，避免深色模式成為未受控的呈現條件 */
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);}
+button{font-family:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;max-width:720px;margin:24px auto}
+.panel h1{font-size:24px;margin:0 0 12px}
+.panel p,.panel li{line-height:1.7}
+.sign{color:var(--muted);font-size:14px;margin-top:16px}
+.btn{background:var(--brand);color:var(--brand-ink);border:0;border-radius:10px;padding:12px 22px;font-size:17px;font-weight:700;cursor:pointer}
+.btn:disabled{background:#cfe9da;color:#4d6b5a;cursor:not-allowed}
+.btn.ghost:disabled{background:transparent;color:var(--ink);border-color:var(--line)}
+#btn-skip{min-width:17em}
+.flash{animation:flash .5s 2}
+@keyframes flash{50%{color:var(--warn)}}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.bar{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:16px;padding:10px 16px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:18px;color:var(--brand)}
+.tab{font-size:15px;color:var(--muted)}
+.tab b{color:var(--ink);font-weight:400}
+.wallet{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:15px}
+.dots{display:flex;gap:4px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#c9cfcb;display:block}
+.donecount{font-size:13px;color:var(--muted)}
+.dots i.on{background:var(--brand)}
+.topline{display:flex;justify-content:space-between;align-items:center;margin:4px 0 12px;color:var(--muted);font-size:14px}
+.alert{background:#fff4d6;color:#6a4b00;border:1px solid #f0d38a;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-weight:700;animation:blink 1s steps(2,start) 3}
+@keyframes blink{50%{opacity:.35}}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 auto;max-width:min(1088px, calc((100dvh - 340px) * 3 + 32px))}
+.grid.trap{max-width:min(1088px, calc((100dvh - 400px) * 3 + 32px))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.img-wrap{position:relative;aspect-ratio:1/1;background:#ddd;container-type:inline-size}
+.img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.disc{position:absolute;display:flex;align-items:center;justify-content:center;background:rgba(20,20,20,.72);color:#fff;font-weight:700;pointer-events:none;white-space:nowrap}
+.disc.text{border-radius:999px}
+.disc.text.edge{right:3%;bottom:3%;font-size:4cqw;padding:.25em .8em}
+.disc.text.center{left:50%;top:50%;transform:translate(-50%,-50%);font-size:6.5cqw;padding:.3em .9em}
+.disc.icon{border-radius:22%;aspect-ratio:1/1}
+.disc.icon svg{position:absolute;left:12%;top:10%;width:46%;height:46%}
+.disc.icon span{position:absolute;right:14%;bottom:10%;line-height:1}
+.disc.icon.edge{right:3%;bottom:3%;width:10%;font-size:3.6cqw}
+.disc.icon.center{left:50%;top:50%;transform:translate(-50%,-50%);width:17%;font-size:6cqw}
+.body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.title{font-size:16px;font-weight:700;line-height:1.4}
+.title .sub{display:block;font-weight:500;font-size:.92em}
+.org{font-size:13px;color:var(--muted)}
+.permit{font-size:12px;color:var(--muted)}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:6px}
+.amt{color:var(--brand);font-weight:800;font-size:18px}
+.donate{padding:8px 16px;font-size:15px}
+.debug{font:11px/1.4 Consolas,monospace;color:#b4231a;background:#fff0ee;padding:4px 6px;border-radius:6px;word-break:break-all}
+.skiprow{display:flex;justify-content:center;margin:16px 0 8px}
+.toast{position:fixed;left:50%;top:6px;transform:translateX(-50%);background:#1f2421;color:#fff;padding:10px 18px;border-radius:999px;font-size:15px;z-index:9}
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto}
+.cat{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:22px;text-align:left;cursor:pointer;font-size:16px;color:var(--ink)}
+.cat:hover{border-color:var(--brand)}
+.cat{position:relative;padding-right:44px}
+.cat::after{content:"\203A";position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:30px;color:var(--brand)}
+.cat b{display:block;font-size:22px;margin-bottom:6px}
+.cat span{color:var(--muted);font-size:14px}
+.q{padding:14px 0;border-bottom:1px solid var(--line)}
+.q .qt{font-weight:700;margin-bottom:8px}
+.scale{display:grid;grid-template-columns:5em 1fr 5em;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.scale .r{text-align:right}
+.scale input{width:100%;accent-color:var(--brand)}
+.scale input[data-touched="0"]{accent-color:#b9c0bc;opacity:.55}
+.q.missing{outline:2px solid var(--warn);outline-offset:4px;border-radius:6px}
+.q.missing .qt::after{content:"（未作答）";color:var(--warn);font-weight:400}
+.val{font-size:13px;color:var(--muted);text-align:center}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:15px}
+.opts input{display:none}
+.opts label:has(input:checked){border-color:var(--brand);background:var(--chip);color:var(--brand);font-weight:700}
+.err{color:var(--warn);font-size:14px;margin-top:8px}
+@media (max-width:640px) and (max-height:620px){
+  .img-wrap{width:33%!important}
+  .title{font-size:13px!important}
+  .body{padding:6px 8px!important}
+  .donate{padding:7px 12px!important}
+}
+@media (max-width:640px){
+  .grid{grid-template-columns:1fr;gap:10px;max-width:none}
+  .card{flex-direction:row}
+  .img-wrap{width:40%;flex:none}
+  .body{padding:8px 10px;gap:3px}
+  .title{font-size:14px}
+  .org,.permit{font-size:12px}
+  .amt{font-size:15px}
+  .donate{padding:10px 14px;font-size:15px}
+  .disc.text.edge{font-size:max(7cqw,11px)}
+  .disc.text.center{font-size:9cqw}
+  .disc.icon.edge{width:17%;font-size:6cqw}
+  .disc.icon.center{width:26%;font-size:9cqw}
+  .cats{grid-template-columns:1fr}
+  .org,.permit{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar .wrap{gap:10px;padding:8px 12px;flex-wrap:nowrap}
+  .logo{font-size:15px;white-space:nowrap}
+  .tab{font-size:13px;white-space:nowrap}
+  .wallet{gap:6px;font-size:13px;white-space:nowrap}
+  .dots{display:none}
+  .topline{display:none}
+  .alert{padding:6px 10px;font-size:13px;margin-bottom:8px}
+  .alert .long{display:none}
+  .wrap{padding:10px 12px}
+  .opts label{padding:9px 16px}
+  .skiprow{position:sticky;bottom:0;background:var(--bg);padding:8px 0;margin:8px 0 0}
+  .panel{padding:18px;margin:12px 0}
+}
+</style>
+<script src="config.js"></script>
+</head>
+<body>
+
+<section id="s-intro" class="wrap">
+  <div class="panel">
+    <h1>網路捐款情境研究</h1>
+    <p>這個研究想了解大家在網路上怎麼選擇捐款專案。接下來你會進入一個模擬的捐款平台：</p>
+    <ul>
+      <li>你的帳戶裡有 <b>$1,000</b>，請把它全部捐出去。</li>
+      <li>每一頁有 3 個捐款專案。你可以選一個捐 <b>$100</b>，或是這一頁都不捐，直接看下一頁。</li>
+      <li>捐滿 10 次（$1,000）就結束，最後有幾個簡短的問題。</li>
+    </ul>
+    <p>整個過程約 8 到 10 分鐘。這是模擬平台，不會向你收取任何費用。你的作答以匿名方式記錄，只用於學術研究，你可以隨時關閉頁面退出。按下「開始」即表示你同意參加。</p>
+    <button class="btn" id="btn-start">開始</button>
+    <p class="sign">政大新聞 李怡志</p>
+  </div>
+</section>
+
+<section id="s-cat" class="wrap" hidden>
+  <div class="panel" style="max-width:900px">
+    <h1>你想捐給哪一類？</h1>
+    <p style="margin:0">選一個類別，接下來會看到這個類別的捐款專案。</p>
+  </div>
+  <div class="cats" id="cats"></div>
+</section>
+
+<section id="s-page" hidden>
+  <div class="bar"><div class="wrap">
+    <span class="logo">公益捐款平台</span>
+    <span class="tab" id="tab"></span>
+    <span class="wallet"><span>餘額 <b id="bal"></b></span><span class="donecount" id="donecount"></span><span class="dots" id="dots"></span></span>
+  </div></div>
+  <div class="wrap">
+    <div class="topline"><span id="pageinfo"></span><span>每次捐款 $100</span></div>
+    <div class="alert" id="trapnote" hidden>注意力檢核：請在標題寫「注意力檢核」的專案按捐款<span class="long">（這一頁不扣款）</span>。</div>
+    <div class="grid" id="grid"></div>
+    <div class="skiprow"><button class="btn ghost" id="btn-skip">這一頁都不捐，看下一頁 →</button></div>
+  </div>
+</section>
+
+<section id="s-survey" class="wrap" hidden>
+  <div class="panel">
+    <h1>最後幾個問題</h1>
+    <p style="margin:0 0 4px;color:var(--muted)">你已經捐完了，謝謝。回答以下問題後就完成。</p>
+    <div id="survey"></div>
+    <div class="err" id="survey-err" hidden>還有題目沒有回答。</div>
+    <p><button class="btn" id="btn-submit">送出</button></p>
+  </div>
+</section>
+
+<section id="s-end" class="wrap" hidden>
+  <div class="panel">
+    <h1>謝謝你的參與</h1>
+    <p id="end-status"></p>
+    <p><b>研究說明：</b>剛才的捐款平台、所有募款專案、組織名稱與勸募字號都是虛構的，所有圖片都由 AI 生成，畫面中的人物與動物並不存在。部分圖片有標示 AI 生成、部分沒有，部分做了遮臉處理，這些差異是研究要比較的條件。你沒有捐出任何真實的金錢。</p>
+    <p id="contact"></p>
+    <div id="end-extra"></div>
+    <p class="sign">政大新聞 李怡志</p>
+  </div>
+</section>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+"use strict";
+const C = window.ABI_CONFIG;
+const $ = s => document.querySelector(s);
+const QS = new URLSearchParams(location.search);
+const DEBUG = QS.has("debug");
+const FORCE_ARM = QS.get("arm");
+if (QS.has("fast")) C.minAnswerSec = 0;
+const rnd = n => Math.floor(Math.random() * n);
+const pick = a => a[rnd(a.length)];
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rnd(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const pad = n => String(n).padStart(2, "0");
+function uid(){ const b = new Uint8Array(8); crypto.getRandomValues(b); return Array.from(b, x => x.toString(16).padStart(2, "0")).join(""); }
+function show(id){ document.querySelectorAll("body > section").forEach(s => s.hidden = (s.id !== id)); window.scrollTo(0, 0); }
+
+const S = {
+  pid: uid(), startedAt: new Date().toISOString(),
+  arm: (C.arms.includes(FORCE_ARM) ? FORCE_ARM : pick(C.arms)),
+  category: "", balance: C.budget, nDon: 0, pages: [], normalCount: 0,
+  usedImg: new Set(), usedTitle: {child: new Set(), elder: new Set(), animal: new Set()},
+  usedOrg: new Set(), reusedImg: 0, trapDone: false, repDone: false, cur: null, shownAt: 0, timer: null
+};
+const PERMIT = C.orgs.map((o, i) => "衛部救字第114" + String((i * 7919 + 13579) % 9000000 + 1000000) + "號");
+let STIM = [];
+
+function pickTitle(cat){
+  const pool = C.titles[cat].map((t, i) => i).filter(i => !S.usedTitle[cat].has(i));
+  const i = pool.length ? pick(pool) : rnd(C.titles[cat].length);
+  S.usedTitle[cat].add(i); return i;
+}
+function pickOrg(){
+  const pool = C.orgs.map((o, i) => i).filter(i => !S.usedOrg.has(i));
+  const i = pool.length ? pick(pool) : rnd(C.orgs.length);
+  S.usedOrg.add(i); return i;
+}
+function pickImage(cat, style, avoid){
+  const pool = STIM.filter(m => m.category === cat && m.style === style && !avoid.has(m.id));
+  const fresh = pool.filter(m => !S.usedImg.has(m.id));
+  let m;
+  if (fresh.length) m = pick(fresh);
+  else if (pool.length) { m = pick(pool); S.reusedImg++; }
+  else { m = pick(STIM.filter(x => x.category === cat && !avoid.has(x.id))) || pick(STIM.filter(x => x.category === cat)); S.reusedImg++; }
+  S.usedImg.add(m.id); return m;
+}
+function makeCard(cat, style, disclosure, avoid){
+  const img = pickImage(cat, style, avoid);
+  avoid.add(img.id);
+  const mask = img.maskable ? pick(C.levels.mask) : "na";
+  return { cat, style: img.style, disclosure, mask, img: img.id,
+           src: "img/" + img.variants[mask === "na" ? "none" : mask],
+           title: pickTitle(cat), org: pickOrg() };
+}
+function makeNormalCards(){
+  const discs = shuffle(C.levels.disclosure).slice(0, C.cardsPerPage);
+  const avoid = new Set();
+  return discs.map(d => {
+    const cat = S.arm === "select" ? S.category : pick(C.categories).key;
+    return makeCard(cat, pick(C.levels.style), d, avoid);
+  });
+}
+function cardCode(c){ return [c.cat, c.style, c.disclosure, c.mask, c.img, "t" + c.title, "o" + c.org].join("|"); }
+
+const SPARK = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></svg>';
+function discHTML(d){
+  if (d === "none") return "";
+  const [type, pos] = d.split("-");
+  if (type === "text") return `<div class="disc text ${pos}">${C.disclosureText}</div>`;
+  return `<div class="disc icon ${pos}">${SPARK}<span>AI</span></div>`;
+}
+function renderPage(){
+  const p = S.cur;
+  $("#tab").innerHTML = (S.arm === "select" ? `目前：<b>${C.categories.find(c => c.key === S.category).label}類</b>` : "<b>全部專案</b>") + ` · 第 ${S.pages.length + 1} 頁`;
+  $("#grid").classList.toggle("trap", p.type === "trap");
+  $("#bal").textContent = "$" + S.balance.toLocaleString("en-US");
+  $("#donecount").textContent = `已捐 ${S.nDon}/${C.budget / C.perDonation}`;
+  $("#dots").innerHTML = Array.from({length: C.budget / C.perDonation}, (_, i) => `<i class="${i < S.nDon ? "on" : ""}"></i>`).join("");
+  $("#pageinfo").textContent = `第 ${S.pages.length + 1} 頁`;
+  $("#trapnote").hidden = p.type !== "trap";
+  $("#grid").innerHTML = p.cards.map((c, i) => {
+    const raw = c.trap ? "注意力檢核｜請在這一張按捐款" : C.titles[c.cat][c.title];
+    const [main, sub] = raw.split("｜");
+    const title = sub ? `${main}<span class="sub">${sub}</span>` : main;
+    return `<article class="card">
+      <div class="img-wrap"><img src="${c.src}" alt="">${discHTML(c.disclosure)}</div>
+      <div class="body">
+        <div class="title">${title}</div>
+        <div class="org">${C.orgs[c.org]}</div>
+        <div class="permit">勸募字號：${PERMIT[c.org]}</div>
+        ${DEBUG ? `<div class="debug">${cardCode(c)}</div>` : ""}
+        <div class="row"><span class="amt">$${C.perDonation}</span><button class="btn donate" data-i="${i + 1}" disabled>捐款</button></div>
+      </div></article>`;
+  }).join("");
+  const skip = $("#btn-skip");
+  const btns = [...document.querySelectorAll(".donate"), skip];
+  btns.forEach(b => b.disabled = true);
+  S.shownAt = performance.now();
+  clearInterval(S.timer);
+  let left = C.minAnswerSec;
+  const label = "這一頁都不捐，看下一頁 →";
+  const tick = () => {
+    if (left <= 0) { clearInterval(S.timer); btns.forEach(b => b.disabled = false); skip.textContent = label; }
+    else skip.textContent = `請先看看這一頁（${left}）`;
+  };
+  tick();
+  if (left > 0) S.timer = setInterval(() => { left--; tick(); }, 1000);
+  document.querySelectorAll(".donate").forEach(b => b.onclick = () => answer(+b.dataset.i));
+  document.querySelectorAll(".donate").forEach(b => b.parentElement.addEventListener("click", () => {
+    if (b.disabled) { skip.classList.remove("flash"); void skip.offsetWidth; skip.classList.add("flash"); }
+  }));
+  skip.onclick = () => answer(0);
+  window.scrollTo(0, 0);
+}
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => t.hidden = true, 1100); }
+
+function answer(choice){
+  const p = S.cur;
+  p.choice = choice; p.rtMs = Math.round(performance.now() - S.shownAt);
+  p.balanceBefore = S.balance;
+  if (p.type === "trap") {
+    p.pass = choice > 0 && p.cards[choice - 1].trap ? "pass" : "fail";
+    toast("檢核完成，這一頁不扣款");
+  } else if (choice > 0) {
+    S.balance -= C.perDonation; S.nDon++;
+    if (S.nDon < C.budget / C.perDonation) toast(`已捐 $${C.perDonation}，還剩 $${S.balance.toLocaleString("en-US")}`);
+  } else {
+    toast(`第 ${S.pages.length + 2} 頁`);
+  }
+  S.pages.push(p);
+  if (p.type === "normal") S.normalCount++;
+  next();
+}
+function next(){
+  if (S.nDon >= C.budget / C.perDonation) return finishPages("spent");
+  if (S.pages.length >= C.maxPages) return finishPages("maxPages");
+  if (!S.trapDone && S.normalCount === C.trapAfterPage) {
+    S.trapDone = true;
+    const cards = makeNormalCards(); cards[rnd(cards.length)].trap = true;
+    S.cur = { type: "trap", cards }; return renderPage();
+  }
+  if (!S.repDone && S.normalCount === C.repeatAfterPage) {
+    S.repDone = true;
+    const src = S.pages.filter(p => p.type === "normal")[C.repeatSourcePage - 1];
+    if (src) { S.cur = { type: "repeat", of: C.repeatSourcePage, cards: src.cards.slice().reverse() }; return renderPage(); }
+  }
+  S.cur = { type: "normal", cards: makeNormalCards() };
+  renderPage();
+}
+function finishPages(reason){ clearInterval(S.timer); $("#toast").hidden = true; S.endReason = reason; buildSurvey(); show("s-survey"); }
+
+function radioQ(k, text, opts){
+  return `<div class="q" data-k="${k}"><div class="qt">${text}</div><div class="opts">${
+    opts.map(o => `<label><input type="radio" name="${k}" value="${o}"><span>${o}</span></label>`).join("")}</div></div>`;
+}
+function buildSurvey(){
+  const blocks = [];
+  blocks.push(`<div class="q" data-k="mc_ai_share"><div class="qt">剛才看到的募款圖片，你覺得大約有幾成是 AI 生成的？</div>
+    <div class="scale"><span>0 成</span><input type="range" min="0" max="10" step="1" value="5" data-touched="0"><span class="r">10 成</span></div><div class="val">請拖動滑桿</div></div>`);
+  blocks.push(radioQ("mc_noticed", "你有注意到部分圖片上有「AI 生成」的標示嗎？", ["有", "沒有", "不確定"]));
+  blocks.push(`<div class="q"><div class="qt" style="font-weight:400;color:var(--muted)">以下每一題，往左或往右拖動，表示你的看法與強度；0 是沒有意見。</div></div>`);
+  shuffle(C.survey.sliders).forEach(s => blocks.push(`<div class="q" data-k="q_${s.key}"><div class="qt">${s.text}</div>
+    <div class="scale"><span>${s.left}</span><input type="range" min="-3" max="3" step="1" value="0" data-touched="0"><span class="r">${s.right}</span></div>
+    <div class="val">請拖動滑桿（−3 到 +3）</div></div>`));
+  blocks.push(radioQ("d_donated", "過去一年，你有沒有捐過款？", ["有", "沒有"]));
+  blocks.push(radioQ("d_donfreq", "過去一年大約捐了幾次？", ["0 次", "1–2 次", "3–5 次", "6 次以上"]));
+  blocks.push(radioQ("d_gender", "性別", ["女", "男", "其他", "不願透露"]));
+  blocks.push(radioQ("d_age", "年齡", ["19 歲以下", "20–29", "30–39", "40–49", "50–59", "60 歲以上"]));
+  $("#survey").innerHTML = blocks.join("");
+  document.querySelectorAll("#survey input[type=range]").forEach(r => {
+    const mark = () => {
+      r.dataset.touched = "1"; r.closest(".q").classList.remove("missing");
+      const v = +r.value;
+      r.closest(".q").querySelector(".val").textContent = r.min === "0" ? `${v} 成` : (v > 0 ? "+" + v : (v === 0 ? "0（沒有意見）" : String(v)));
+    };
+    ["input", "change", "pointerdown", "keydown"].forEach(ev => r.addEventListener(ev, mark));
+  });
+  document.querySelectorAll("#survey input[type=radio]").forEach(r => r.addEventListener("change", () => r.closest(".q").classList.remove("missing")));
+}
+function collectSurvey(){
+  const out = {}; let ok = true;
+  document.querySelectorAll("#survey .q[data-k]").forEach(q => {
+    const k = q.dataset.k; const r = q.querySelector("input[type=range]");
+    let answered;
+    if (r) { answered = r.dataset.touched === "1"; out[k] = r.value; }
+    else { const c = q.querySelector("input:checked"); answered = !!c; out[k] = c ? c.value : ""; }
+    q.classList.toggle("missing", !answered);
+    if (!answered) ok = false;
+  });
+  return ok ? out : null;
+}
+
+function payload(survey){
+  const counted = S.pages.filter(p => p.type !== "trap");
+  const pos = [0, 0, 0]; counted.forEach(p => { if (p.choice > 0) pos[p.choice - 1]++; });
+  const nChosen = pos.reduce((a, b) => a + b, 0);
+  const trap = S.pages.find(p => p.type === "trap");
+  const rep = S.pages.find(p => p.type === "repeat");
+  const repSrc = S.pages.filter(p => p.type === "normal")[C.repeatSourcePage - 1];
+  const chosenImg = p => p && p.choice > 0 ? p.cards[p.choice - 1].img : "skip";
+  const d = {
+    pid: S.pid, arm: S.arm, category: S.arm === "select" ? S.category : "mixed",
+    device: window.innerWidth <= 640 ? "mobile" : "desktop",
+    startedAt: S.startedAt, endedAt: new Date().toISOString(),
+    durationSec: Math.round((Date.now() - Date.parse(S.startedAt)) / 1000),
+    endReason: S.endReason, nPages: S.pages.length, nDonations: S.nDon, leftover: S.balance,
+    minAnswerSec: C.minAnswerSec, maxPages: C.maxPages, reusedImg: S.reusedImg,
+    trap_pass: trap ? trap.pass : "na", trap_rtMs: trap ? trap.rtMs : "",
+    rep_of: rep ? C.repeatSourcePage : "na", rep_orig: chosenImg(repSrc), rep_again: rep ? chosenImg(rep) : "na",
+    rep_consistent: rep ? (chosenImg(repSrc) === chosenImg(rep) ? "yes" : "no") : "na", rep_rtMs: rep ? rep.rtMs : "",
+    pos1: pos[0], pos2: pos[1], pos3: pos[2], posMaxRatio: nChosen ? (Math.max(...pos) / nChosen).toFixed(2) : "",
+    pages_json: JSON.stringify(S.pages.map(p => ({ t: p.type, ch: p.choice, rt: p.rtMs, c: p.cards.map(c => c.trap ? "TRAP" : cardCode(c)) })))
+  };
+  S.pages.forEach((p, i) => {
+    const n = "p" + pad(i + 1);
+    d[n + "_type"] = p.type; d[n + "_choice"] = p.choice; d[n + "_rtMs"] = p.rtMs;
+    p.cards.forEach((c, j) => d[`${n}_c${j + 1}`] = c.trap ? "TRAP" : cardCode(c));
+  });
+  return Object.assign(d, survey);
+}
+function download(obj){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 1)], {type: "application/json"}));
+  a.download = `abi_${S.pid}.json`; a.textContent = "下載作答資料（JSON）"; a.className = "btn ghost";
+  a.style.display = "inline-block"; a.style.textDecoration = "none";
+  $("#end-extra").appendChild(a);
+}
+async function submit(){
+  const sv = collectSurvey();
+  if (!sv) {
+    $("#survey-err").hidden = false;
+    const first = document.querySelector("#survey .q.missing");
+    if (first) first.scrollIntoView({behavior: "smooth", block: "center"});
+    return;
+  }
+  $("#btn-submit").disabled = true;
+  const data = payload(sv);
+  window.ABI_LAST = data;
+  show("s-end");
+  if (!C.endpoint) {
+    $("#end-status").textContent = "（測試模式：資料沒有上傳，可以下載檢查。）";
+    download(data);
+    if (DEBUG) $("#end-extra").insertAdjacentHTML("beforeend", `<pre class="debug" style="white-space:pre-wrap;max-height:40vh;overflow:auto">${JSON.stringify(data, null, 1).replace(/</g, "&lt;")}</pre>`);
+    return;
+  }
+  try {
+    const r = await fetch(C.endpoint, { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data) });
+    if (!r.ok) throw new Error(r.status);
+    $("#end-status").textContent = "你的作答已經送出。";
+  } catch (e) {
+    $("#end-status").textContent = "作答上傳失敗，請下載作答資料後寄給研究者" + (C.contactEmail ? `（${C.contactEmail}）` : "") + "。";
+    download(data);
+  }
+}
+
+fetch("stimuli.json").then(r => r.json()).then(m => { STIM = m; }).catch(() => { $("#btn-start").disabled = true; $("#btn-start").textContent = "載入失敗，請重新整理"; });
+$("#cats").innerHTML = shuffle(C.categories).map(c => `<button class="cat" data-k="${c.key}"><b>${c.label}</b><span>${c.desc}</span></button>`).join("");
+document.querySelectorAll(".cat").forEach(b => b.onclick = () => { S.category = b.dataset.k; show("s-page"); next(); });
+$("#btn-start").onclick = () => {
+  if (!STIM.length) return;
+  if (S.arm === "select") show("s-cat"); else { show("s-page"); next(); }
+};
+$("#btn-submit").onclick = submit;
+$("#contact").textContent = C.contactEmail
+  ? `如果你對研究有任何疑問，可以寫信給研究者：${C.contactEmail}` + (C.ethicsContact ? `；研究倫理相關問題請洽 ${C.ethicsContact}` : "") + "。"
+  : "如果你對研究有任何疑問，可以聯絡研究者。";
+window.ABI_STATE = S;
+})();
+</script>
+</body>
+</html>

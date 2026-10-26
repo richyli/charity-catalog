@@ -1,0 +1,214 @@
+[
+ {
+  "id": "child2_cartoon_front",
+  "category": "child",
+  "individual": "child2",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "none": "child2_cartoon_front__none.jpg"
+  }
+ },
+ {
+  "id": "child2_painting_front",
+  "category": "child",
+  "individual": "child2",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "none": "child2_painting_front__none.jpg",
+   "eye": "child2_painting_front__eye.jpg",
+   "blur": "child2_painting_front__blur.jpg"
+  }
+ },
+ {
+  "id": "child2_photo_front",
+  "category": "child",
+  "individual": "child2",
+  "style": "photo",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "none": "child2_photo_front__none.jpg",
+   "eye": "child2_photo_front__eye.jpg",
+   "blur": "child2_photo_front__blur.jpg"
+  }
+ },
+ {
+  "id": "child_cartoon_back",
+  "category": "child",
+  "individual": "child",
+  "style": "cartoon",
+  "orientation": "back",
+  "maskable": false,
+  "variants": {
+   "none": "child_cartoon_back__none.jpg"
+  }
+ },
+ {
+  "id": "child_painting_side",
+  "category": "child",
+  "individual": "child",
+  "style": "painting",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "none": "child_painting_side__none.jpg",
+   "eye": "child_painting_side__eye.jpg",
+   "blur": "child_painting_side__blur.jpg"
+  }
+ },
+ {
+  "id": "child_photo_front",
+  "category": "child",
+  "individual": "child",
+  "style": "photo",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "none": "child_photo_front__none.jpg",
+   "eye": "child_photo_front__eye.jpg",
+   "blur": "child_photo_front__blur.jpg"
+  }
+ },
+ {
+  "id": "dog2_cartoon_front",
+  "category": "animal",
+  "individual": "dog2",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "none": "dog2_cartoon_front__none.jpg"
+  }
+ },
+ {
+  "id": "dog2_painting_front",
+  "category": "animal",
+  "individual": "dog2",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "none": "dog2_painting_front__none.jpg"
+  }
+ },
+ {
+  "id": "dog2_photo_side",
+  "category": "animal",
+  "individual": "dog2",
+  "style": "photo",
+  "orientation": "side",
+  "maskable": false,
+  "variants": {
+   "none": "dog2_photo_side__none.jpg"
+  }
+ },
+ {
+  "id": "dog_cartoon_side",
+  "category": "animal",
+  "individual": "dog",
+  "style": "cartoon",
+  "orientation": "side",
+  "maskable": false,
+  "variants": {
+   "none": "dog_cartoon_side__none.jpg"
+  }
+ },
+ {
+  "id": "dog_painting_back",
+  "category": "animal",
+  "individual": "dog",
+  "style": "painting",
+  "orientation": "back",
+  "maskable": false,
+  "variants": {
+   "none": "dog_painting_back__none.jpg"
+  }
+ },
+ {
+  "id": "dog_photo_front",
+  "category": "animal",
+  "individual": "dog",
+  "style": "photo",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "none": "dog_photo_front__none.jpg"
+  }
+ },
+ {
+  "id": "elder2_cartoon_front",
+  "category": "elder",
+  "individual": "elder2",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "none": "elder2_cartoon_front__none.jpg"
+  }
+ },
+ {
+  "id": "elder2_painting_side",
+  "category": "elder",
+  "individual": "elder2",
+  "style": "painting",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "none": "elder2_painting_side__none.jpg",
+   "eye": "elder2_painting_side__eye.jpg",
+   "blur": "elder2_painting_side__blur.jpg"
+  }
+ },
+ {
+  "id": "elder_cartoon_side",
+  "category": "elder",
+  "individual": "elder",
+  "style": "cartoon",
+  "orientation": "side",
+  "maskable": false,
+  "variants": {
+   "none": "elder_cartoon_side__none.jpg"
+  }
+ },
+ {
+  "id": "elder_painting_front",
+  "category": "elder",
+  "individual": "elder",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "none": "elder_painting_front__none.jpg",
+   "eye": "elder_painting_front__eye.jpg",
+   "blur": "elder_painting_front__blur.jpg"
+  }
+ },
+ {
+  "id": "elder_photo_back",
+  "category": "elder",
+  "individual": "elder",
+  "style": "photo",
+  "orientation": "back",
+  "maskable": false,
+  "variants": {
+   "none": "elder_photo_back__none.jpg"
+  }
+ },
+ {
+  "id": "elder_photo_side",
+  "category": "elder",
+  "individual": "elder",
+  "style": "photo",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "none": "elder_photo_side__none.jpg",
+   "eye": "elder_photo_side__eye.jpg",
+   "blur": "elder_photo_side__blur.jpg"
+  }
+ }
+]
