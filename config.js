@@ -52,6 +52,7 @@ window.ABI_CONFIG = {
       // 信任與訴求方式：調節揭露、表情、遮臉
       { key: "npo_trust",    text: "對公益團體", left: "不信任", right: "信任" },
       { key: "appeal_pity",  text: "以悲慘不幸的影像來募款", left: "反對", right: "支持" },
+      { key: "ai_charity",   text: "公益團體使用 AI 生成募款影像", left: "不同意", right: "同意" },
       { key: "appeal_privacy", text: "募款影像中受助者的隱私", left: "不在意", right: "很在意" },
       // 共同方法變異 marker
       { key: "marker_blue",  text: "藍色", left: "不喜歡", right: "喜歡" }
