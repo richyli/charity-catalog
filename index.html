@@ -49,12 +49,12 @@ button{font-family:inherit}
 .disc{position:absolute;display:flex;align-items:center;justify-content:center;background:rgba(20,20,20,.72);color:#fff;font-weight:700;pointer-events:none;white-space:nowrap}
 .disc.text{border-radius:999px}
 .disc.text.edge{right:3%;bottom:3%;font-size:4cqw;padding:.25em .8em}
-.disc.text.center{left:50%;top:50%;transform:translate(-50%,-50%);font-size:6.5cqw;padding:.3em .9em}
+.disc.text.center{left:50%;top:64%;transform:translate(-50%,-50%);font-size:6.5cqw;padding:.3em .9em}
 .disc.icon{border-radius:22%;aspect-ratio:1/1}
 .disc.icon svg{position:absolute;left:12%;top:10%;width:46%;height:46%}
 .disc.icon span{position:absolute;right:14%;bottom:10%;line-height:1}
 .disc.icon.edge{right:3%;bottom:3%;width:10%;font-size:3.6cqw}
-.disc.icon.center{left:50%;top:50%;transform:translate(-50%,-50%);width:17%;font-size:6cqw}
+.disc.icon.center{left:50%;top:64%;transform:translate(-50%,-50%);width:17%;font-size:6cqw}
 .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
 .title{font-size:16px;font-weight:700;line-height:1.4}
 .title .sub{display:block;font-weight:500;font-size:.92em}
@@ -177,7 +177,7 @@ button{font-family:inherit}
   <div class="panel">
     <h1>謝謝你的參與</h1>
     <p id="end-status"></p>
-    <p><b>研究說明：</b>剛才的捐款平台、所有募款專案、組織名稱與勸募字號都是虛構的，所有圖片都由 AI 生成，畫面中的人物與動物並不存在。部分圖片有標示 AI 生成、部分沒有，部分做了遮臉處理，這些差異是研究要比較的條件。你沒有捐出任何真實的金錢。</p>
+    <p><b>研究說明：</b>剛才的捐款平台、募款專案、組織名稱與勸募字號都是虛構的，所有圖片都由 AI 生成，畫面中的人物與動物並不存在。部分圖片有標示 AI 生成、部分沒有，部分做了遮臉處理，這些差異是研究要比較的條件。你沒有捐出任何真實的金錢。</p>
     <p id="contact"></p>
     <div id="end-extra"></div>
     <p class="sign">政大新聞 李怡志</p>
@@ -206,22 +206,11 @@ const S = {
   pid: uid(), startedAt: new Date().toISOString(),
   arm: (C.arms.includes(FORCE_ARM) ? FORCE_ARM : pick(C.arms)),
   category: "", balance: C.budget, nDon: 0, pages: [], normalCount: 0,
-  usedImg: new Set(), usedTitle: {child: new Set(), elder: new Set(), animal: new Set()},
-  usedOrg: new Set(), reusedImg: 0, trapDone: false, repDone: false, cur: null, shownAt: 0, timer: null
+  usedImg: new Set(), reusedImg: 0, trapDone: false, repDone: false, cur: null, shownAt: 0, timer: null
 };
-const PERMIT = C.orgs.map((o, i) => "衛部救字第114" + String((i * 7919 + 13579) % 9000000 + 1000000) + "號");
+
 let STIM = [];
 
-function pickTitle(cat){
-  const pool = C.titles[cat].map((t, i) => i).filter(i => !S.usedTitle[cat].has(i));
-  const i = pool.length ? pick(pool) : rnd(C.titles[cat].length);
-  S.usedTitle[cat].add(i); return i;
-}
-function pickOrg(){
-  const pool = C.orgs.map((o, i) => i).filter(i => !S.usedOrg.has(i));
-  const i = pool.length ? pick(pool) : rnd(C.orgs.length);
-  S.usedOrg.add(i); return i;
-}
 function pickImage(cat, style, avoid){
   const pool = STIM.filter(m => m.category === cat && m.style === style && !avoid.has(m.id));
   const fresh = pool.filter(m => !S.usedImg.has(m.id));
@@ -236,8 +225,7 @@ function makeCard(cat, style, disclosure, avoid){
   avoid.add(img.id);
   const mask = img.maskable ? pick(C.levels.mask) : "na";
   return { cat, style: img.style, disclosure, mask, img: img.id,
-           src: "img/" + img.variants[mask === "na" ? "none" : mask],
-           title: pickTitle(cat), org: pickOrg() };
+           src: "img/" + img.variants[mask === "na" ? "none" : mask] };
 }
 function makeNormalCards(){
   const discs = shuffle(C.levels.disclosure).slice(0, C.cardsPerPage);
@@ -247,7 +235,7 @@ function makeNormalCards(){
     return makeCard(cat, pick(C.levels.style), d, avoid);
   });
 }
-function cardCode(c){ return [c.cat, c.style, c.disclosure, c.mask, c.img, "t" + c.title, "o" + c.org].join("|"); }
+function cardCode(c){ return [c.cat, c.style, c.disclosure, c.mask, c.img].join("|"); }
 
 const SPARK = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></svg>';
 function discHTML(d){
@@ -266,15 +254,15 @@ function renderPage(){
   $("#pageinfo").textContent = `第 ${S.pages.length + 1} 頁`;
   $("#trapnote").hidden = p.type !== "trap";
   $("#grid").innerHTML = p.cards.map((c, i) => {
-    const raw = c.trap ? "注意力檢核｜請在這一張按捐款" : C.titles[c.cat][c.title];
+    const raw = c.trap ? "注意力檢核｜請在這一張按捐款" : C.projectTitle;
     const [main, sub] = raw.split("｜");
     const title = sub ? `${main}<span class="sub">${sub}</span>` : main;
     return `<article class="card">
       <div class="img-wrap"><img src="${c.src}" alt="">${discHTML(c.disclosure)}</div>
       <div class="body">
         <div class="title">${title}</div>
-        <div class="org">${C.orgs[c.org]}</div>
-        <div class="permit">勸募字號：${PERMIT[c.org]}</div>
+        <div class="org">${C.orgName}</div>
+        <div class="permit">勸募字號：${C.permitNo}</div>
         ${DEBUG ? `<div class="debug">${cardCode(c)}</div>` : ""}
         <div class="row"><span class="amt">$${C.perDonation}</span><button class="btn donate" data-i="${i + 1}" disabled>捐款</button></div>
       </div></article>`;
