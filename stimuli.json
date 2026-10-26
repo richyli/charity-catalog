@@ -37,14 +37,14 @@
   }
  },
  {
-  "id": "child_cartoon_back",
+  "id": "child_cartoon_front",
   "category": "child",
   "individual": "child",
   "style": "cartoon",
-  "orientation": "back",
+  "orientation": "front",
   "maskable": false,
   "variants": {
-   "none": "child_cartoon_back__none.jpg"
+   "none": "child_cartoon_front__none.jpg"
   }
  },
  {
@@ -90,9 +90,11 @@
   "individual": "dog2",
   "style": "painting",
   "orientation": "front",
-  "maskable": false,
+  "maskable": true,
   "variants": {
-   "none": "dog2_painting_front__none.jpg"
+   "none": "dog2_painting_front__none.jpg",
+   "eye": "dog2_painting_front__eye.jpg",
+   "blur": "dog2_painting_front__blur.jpg"
   }
  },
  {
@@ -101,9 +103,11 @@
   "individual": "dog2",
   "style": "photo",
   "orientation": "side",
-  "maskable": false,
+  "maskable": true,
   "variants": {
-   "none": "dog2_photo_side__none.jpg"
+   "none": "dog2_photo_side__none.jpg",
+   "eye": "dog2_photo_side__eye.jpg",
+   "blur": "dog2_photo_side__blur.jpg"
   }
  },
  {
@@ -118,14 +122,16 @@
   }
  },
  {
-  "id": "dog_painting_back",
+  "id": "dog_painting_side",
   "category": "animal",
   "individual": "dog",
   "style": "painting",
-  "orientation": "back",
-  "maskable": false,
+  "orientation": "side",
+  "maskable": true,
   "variants": {
-   "none": "dog_painting_back__none.jpg"
+   "none": "dog_painting_side__none.jpg",
+   "eye": "dog_painting_side__eye.jpg",
+   "blur": "dog_painting_side__blur.jpg"
   }
  },
  {
@@ -134,9 +140,11 @@
   "individual": "dog",
   "style": "photo",
   "orientation": "front",
-  "maskable": false,
+  "maskable": true,
   "variants": {
-   "none": "dog_photo_front__none.jpg"
+   "none": "dog_photo_front__none.jpg",
+   "eye": "dog_photo_front__eye.jpg",
+   "blur": "dog_photo_front__blur.jpg"
   }
  },
  {
@@ -164,6 +172,19 @@
   }
  },
  {
+  "id": "elder2_photo_front",
+  "category": "elder",
+  "individual": "elder2",
+  "style": "photo",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "none": "elder2_photo_front__none.jpg",
+   "eye": "elder2_photo_front__eye.jpg",
+   "blur": "elder2_photo_front__blur.jpg"
+  }
+ },
+ {
   "id": "elder_cartoon_side",
   "category": "elder",
   "individual": "elder",
@@ -185,17 +206,6 @@
    "none": "elder_painting_front__none.jpg",
    "eye": "elder_painting_front__eye.jpg",
    "blur": "elder_painting_front__blur.jpg"
-  }
- },
- {
-  "id": "elder_photo_back",
-  "category": "elder",
-  "individual": "elder",
-  "style": "photo",
-  "orientation": "back",
-  "maskable": false,
-  "variants": {
-   "none": "elder_photo_back__none.jpg"
   }
  },
  {
