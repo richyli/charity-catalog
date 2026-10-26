@@ -48,13 +48,16 @@ button{font-family:inherit}
 .img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
 .disc{position:absolute;display:flex;align-items:center;justify-content:center;background:rgba(20,20,20,.72);color:#fff;font-weight:700;pointer-events:none;white-space:nowrap}
 .disc.text{border-radius:999px}
-.disc.text.edge{right:3%;bottom:3%;font-size:4cqw;padding:.25em .8em}
-.disc.text.center{left:50%;top:64%;transform:translate(-50%,-50%);font-size:6.5cqw;padding:.3em .9em}
+.disc.edge{right:3%;bottom:3%}
+.disc.center{left:50%;top:64%;transform:translate(-50%,-50%)}
+.disc.text{padding:.28em .85em}
+.disc.text.small{font-size:4cqw}
+.disc.text.large{font-size:6.5cqw}
 .disc.icon{border-radius:22%;aspect-ratio:1/1}
 .disc.icon svg{position:absolute;left:12%;top:10%;width:46%;height:46%}
 .disc.icon span{position:absolute;right:14%;bottom:10%;line-height:1}
-.disc.icon.edge{right:3%;bottom:3%;width:10%;font-size:3.6cqw}
-.disc.icon.center{left:50%;top:64%;transform:translate(-50%,-50%);width:17%;font-size:6cqw}
+.disc.icon.small{width:10%;font-size:3.6cqw}
+.disc.icon.large{width:17%;font-size:6cqw}
 .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
 .title{font-size:16px;font-weight:700;line-height:1.4}
 .title .sub{display:block;font-weight:500;font-size:.92em}
@@ -102,10 +105,10 @@ button{font-family:inherit}
   .org,.permit{font-size:12px}
   .amt{font-size:15px}
   .donate{padding:10px 14px;font-size:15px}
-  .disc.text.edge{font-size:max(7cqw,11px)}
-  .disc.text.center{font-size:9cqw}
-  .disc.icon.edge{width:17%;font-size:6cqw}
-  .disc.icon.center{width:26%;font-size:9cqw}
+  .disc.text.small{font-size:max(7cqw,11px)}
+  .disc.text.large{font-size:9cqw}
+  .disc.icon.small{width:17%;font-size:6cqw}
+  .disc.icon.large{width:26%;font-size:9cqw}
   .cats{grid-template-columns:1fr}
   .org,.permit{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .bar .wrap{gap:10px;padding:8px 12px;flex-wrap:nowrap}
@@ -242,7 +245,13 @@ function makeCard(cat, style, disclosure, avoid, used){
            title: leastUsed(TITLES.length, S.titleUse, used.t), org: leastUsed(C.orgs.length, S.orgUse, used.o) };
 }
 function makeNormalCards(){
-  const discs = shuffle(C.levels.disclosure).slice(0, C.cardsPerPage);
+  // 同一頁三張卡的揭露組合不完全相同（「無揭露」可以重複出現）
+  const discs = [];
+  let guard = 0;
+  while (discs.length < C.cardsPerPage && guard++ < 200) {
+    const d = drawDisclosure();
+    if (d === "none" || !discs.includes(d)) discs.push(d);
+  }
   const avoid = new Set(); const used = { t: new Set(), o: new Set() };
   return discs.map(d => {
     const cat = S.arm === "select" ? S.category : pick(C.categories).key;
@@ -254,9 +263,14 @@ function cardCode(c){ return [c.cat, c.gender, c.style, c.expr, c.disclosure, c.
 const SPARK = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></svg>';
 function discHTML(d){
   if (d === "none") return "";
-  const [type, pos] = d.split("-");
-  if (type === "text") return `<div class="disc text ${pos}">${C.disclosureText}</div>`;
-  return `<div class="disc icon ${pos}">${SPARK}<span>AI</span></div>`;
+  const [type, pos, size] = d.split("-");
+  if (type === "text") return `<div class="disc text ${pos} ${size}">${C.disclosureText}</div>`;
+  return `<div class="disc icon ${pos} ${size}">${SPARK}<span>AI</span></div>`;
+}
+// 揭露＝型態 × 位置 × 大小（三個獨立屬性）；無揭露時位置與大小不適用
+function drawDisclosure(){
+  const type = pick(C.levels.discType);
+  return type === "none" ? "none" : [type, pick(C.levels.discPos), pick(C.levels.discSize)].join("-");
 }
 function renderPage(){
   const p = S.cur;

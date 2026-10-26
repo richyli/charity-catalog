@@ -21,7 +21,10 @@ window.ABI_CONFIG = {
   ],
   levels: {
     style: ["photo", "painting", "cartoon"],
-    disclosure: ["none", "text-edge", "text-center", "icon-edge", "icon-center"],
+    // 揭露拆成三個屬性（使用者 2026-10-26：中央大、邊緣小是混淆，大小要獨立）
+    discType: ["none", "text", "icon"],
+    discPos: ["edge", "center"],
+    discSize: ["small", "large"],
     mask: ["none", "eye", "blur"],
     expression: ["sad", "smile"],  // 2026-10-26 使用者選定；微笑版由同一張圖編輯而來
     gender: ["female", "male"]     // 2026-10-26 使用者選定；只用於人（兒童、長者），動物記為 na
