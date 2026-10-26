@@ -206,10 +206,20 @@ const S = {
   pid: uid(), startedAt: new Date().toISOString(),
   arm: (C.arms.includes(FORCE_ARM) ? FORCE_ARM : pick(C.arms)),
   category: "", balance: C.budget, nDon: 0, pages: [], normalCount: 0,
-  usedImg: new Set(), reusedImg: 0, trapDone: false, repDone: false, cur: null, shownAt: 0, timer: null
+  usedImg: new Set(), reusedImg: 0, titleUse: {}, orgUse: {}, trapDone: false, repDone: false, cur: null, shownAt: 0, timer: null
 };
 
 let STIM = [];
+const TITLES = [];
+C.titleSlotA.forEach((a, i) => C.titleSlotB.forEach((b, j) => TITLES.push({ id: `${i}${j}`, text: `${a}｜${b}計畫` })));
+const PERMIT = C.orgs.map((o, i) => "衛部救字第114" + String((i * 7919 + 13579) % 9000000 + 1000000) + "號");
+// 用最少的優先、同頁不重複，讓名稱與屬性獨立且出現次數平均
+function leastUsed(n, use, exclude){
+  const ids = Array.from({length: n}, (_, i) => i).filter(i => !exclude.has(i));
+  const min = Math.min(...ids.map(i => use[i] || 0));
+  const i = pick(ids.filter(i => (use[i] || 0) === min));
+  use[i] = (use[i] || 0) + 1; exclude.add(i); return i;
+}
 
 function pickImage(cat, style, avoid){
   const pool = STIM.filter(m => m.category === cat && m.style === style && !avoid.has(m.id));
@@ -220,22 +230,23 @@ function pickImage(cat, style, avoid){
   else { m = pick(STIM.filter(x => x.category === cat && !avoid.has(x.id))) || pick(STIM.filter(x => x.category === cat)); S.reusedImg++; }
   S.usedImg.add(m.id); return m;
 }
-function makeCard(cat, style, disclosure, avoid){
+function makeCard(cat, style, disclosure, avoid, used){
   const img = pickImage(cat, style, avoid);
   avoid.add(img.id);
   const mask = img.maskable ? pick(C.levels.mask) : "na";
   return { cat, style: img.style, disclosure, mask, img: img.id,
-           src: "img/" + img.variants[mask === "na" ? "none" : mask] };
+           src: "img/" + img.variants[mask === "na" ? "none" : mask],
+           title: leastUsed(TITLES.length, S.titleUse, used.t), org: leastUsed(C.orgs.length, S.orgUse, used.o) };
 }
 function makeNormalCards(){
   const discs = shuffle(C.levels.disclosure).slice(0, C.cardsPerPage);
-  const avoid = new Set();
+  const avoid = new Set(); const used = { t: new Set(), o: new Set() };
   return discs.map(d => {
     const cat = S.arm === "select" ? S.category : pick(C.categories).key;
-    return makeCard(cat, pick(C.levels.style), d, avoid);
+    return makeCard(cat, pick(C.levels.style), d, avoid, used);
   });
 }
-function cardCode(c){ return [c.cat, c.style, c.disclosure, c.mask, c.img].join("|"); }
+function cardCode(c){ return [c.cat, c.style, c.disclosure, c.mask, c.img, "t" + TITLES[c.title].id, "o" + c.org].join("|"); }
 
 const SPARK = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></svg>';
 function discHTML(d){
@@ -254,15 +265,15 @@ function renderPage(){
   $("#pageinfo").textContent = `第 ${S.pages.length + 1} 頁`;
   $("#trapnote").hidden = p.type !== "trap";
   $("#grid").innerHTML = p.cards.map((c, i) => {
-    const raw = c.trap ? "注意力檢核｜請在這一張按捐款" : C.projectTitle;
+    const raw = c.trap ? "注意力檢核｜請在這一張按捐款" : TITLES[c.title].text;
     const [main, sub] = raw.split("｜");
-    const title = sub ? `${main}<span class="sub">${sub}</span>` : main;
+    const title = sub && raw.length > 12 ? `${main}<span class="sub">${sub}</span>` : raw;
     return `<article class="card">
       <div class="img-wrap"><img src="${c.src}" alt="">${discHTML(c.disclosure)}</div>
       <div class="body">
         <div class="title">${title}</div>
-        <div class="org">${C.orgName}</div>
-        <div class="permit">勸募字號：${C.permitNo}</div>
+        <div class="org">${C.orgs[c.org]}</div>
+        <div class="permit">勸募字號：${PERMIT[c.org]}</div>
         ${DEBUG ? `<div class="debug">${cardCode(c)}</div>` : ""}
         <div class="row"><span class="amt">$${C.perDonation}</span><button class="btn donate" data-i="${i + 1}" disabled>捐款</button></div>
       </div></article>`;
