@@ -358,23 +358,17 @@ function radioQ(k, text, opts){
 }
 function buildSurvey(){
   const blocks = [];
-  blocks.push(`<div class="q" data-k="mc_ai_share"><div class="qt">剛才看到的募款圖片，你覺得大約有幾成是 AI 生成的？</div>
-    <div class="scale"><span>0 成</span><input type="range" min="0" max="10" step="1" value="5" data-touched="0"><span class="r">10 成</span></div><div class="val">請拖動滑桿</div></div>`);
-  blocks.push(radioQ("mc_noticed", "你有注意到部分圖片上有「AI 生成」的標示嗎？", ["有", "沒有", "不確定"]));
   blocks.push(`<div class="q"><div class="qt" style="font-weight:400;color:var(--muted)">以下每一題，往左或往右拖動，表示你的看法與強度；0 是沒有意見。</div></div>`);
   shuffle(C.survey.sliders).forEach(s => blocks.push(`<div class="q" data-k="q_${s.key}"><div class="qt">${s.text}</div>
     <div class="scale"><span>${s.left}</span><input type="range" min="-3" max="3" step="1" value="0" data-touched="0"><span class="r">${s.right}</span></div>
     <div class="val">請拖動滑桿（−3 到 +3）</div></div>`));
-  blocks.push(radioQ("d_donated", "過去一年，你有沒有捐過款？", ["有", "沒有"]));
-  blocks.push(radioQ("d_donfreq", "過去一年大約捐了幾次？", ["0 次", "1–2 次", "3–5 次", "6 次以上"]));
-  blocks.push(radioQ("d_gender", "性別", ["女", "男", "其他", "不願透露"]));
-  blocks.push(radioQ("d_age", "年齡", ["19 歲以下", "20–29", "30–39", "40–49", "50–59", "60 歲以上"]));
+  C.survey.radios.forEach(r => blocks.push(radioQ(r.key, r.text, r.opts)));
   $("#survey").innerHTML = blocks.join("");
   document.querySelectorAll("#survey input[type=range]").forEach(r => {
     const mark = () => {
       r.dataset.touched = "1"; r.closest(".q").classList.remove("missing");
       const v = +r.value;
-      r.closest(".q").querySelector(".val").textContent = r.min === "0" ? `${v} 成` : (v > 0 ? "+" + v : (v === 0 ? "0（沒有意見）" : String(v)));
+      r.closest(".q").querySelector(".val").textContent = v > 0 ? "+" + v : (v === 0 ? "0（沒有意見）" : String(v));
     };
     ["input", "change", "pointerdown", "keydown"].forEach(ev => r.addEventListener(ev, mark));
   });
