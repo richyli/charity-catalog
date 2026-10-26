@@ -64,7 +64,7 @@ window.ABI_CONFIG = {
       { key: "emp_animal",   text: "看到受傷或流浪的動物時，心裡的感受", left: "平靜", right: "難受" },
       // 信任與訴求方式
       { key: "npo_trust",    text: "台灣的公益團體", left: "不信任", right: "信任" },
-      { key: "npo_transp",   text: "公益團體使用捐款的方式", left: "不透明", right: "透明" },
+      { key: "npo_transp",   text: "公益團體公開捐款用途", left: "不夠公開", right: "充分公開" },
       { key: "appeal_pity",  text: "以悲慘畫面打動人的募款方式", left: "反對", right: "支持" },
       { key: "appeal_privacy", text: "募款照片中受助者的隱私保護", left: "不在意", right: "很在意" },
       // 共同方法變異 marker
