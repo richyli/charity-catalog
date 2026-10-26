@@ -86,6 +86,15 @@ button{font-family:inherit}
 .q.missing{outline:2px solid var(--warn);outline-offset:4px;border-radius:6px}
 .q.missing .qt::after{content:"（未作答）";color:var(--warn);font-weight:400}
 .val{font-size:13px;color:var(--muted);text-align:center}
+.likert{display:grid;grid-template-columns:4.5em 1fr 4.5em;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.likert .r{text-align:right}
+.pts{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.pt{display:flex;cursor:pointer}
+.pt input{position:absolute;opacity:0;pointer-events:none}
+.pt span{flex:1;text-align:center;border:1.5px solid var(--line);border-radius:8px;padding:9px 0;font-size:14px;color:var(--ink);min-height:40px;display:flex;align-items:center;justify-content:center}
+.pt input:checked+span{border-color:var(--brand);background:var(--brand);color:#fff;font-weight:700}
+.pt input:focus-visible+span{outline:2px solid var(--brand);outline-offset:2px}
+@media (max-width:640px){.likert{grid-template-columns:1fr 1fr;row-gap:6px}.likert .pts{grid-column:1/-1;grid-row:2}.likert .end{grid-row:1}}
 .opts{display:flex;flex-wrap:wrap;gap:8px}
 .opts label{border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:15px}
 .opts input{display:none}
@@ -363,20 +372,14 @@ function radioQ(k, text, opts){
 }
 function buildSurvey(){
   const blocks = [];
-  blocks.push(`<div class="q"><div class="qt" style="font-weight:400;color:var(--muted)">以下每一題，往左或往右拖動，表示你的看法與強度；0 是中間。</div></div>`);
-  shuffle(C.survey.sliders).forEach(s => blocks.push(`<div class="q" data-k="q_${s.key}" data-mid="${s.mid || "沒有意見"}"><div class="qt">${s.text}</div>
-    <div class="scale"><span>${s.left}</span><input type="range" min="-3" max="3" step="1" value="0" data-touched="0"><span class="r">${s.right}</span></div>
-    <div class="val">請拖動滑桿（−3 到 +3）</div></div>`));
+  blocks.push(`<div class="q"><div class="qt" style="font-weight:400;color:var(--muted)">以下每一題，請點選最符合你看法的位置；越靠兩端表示越強烈。</div></div>`);
+  shuffle(C.survey.sliders).forEach(s => {
+    const pts = [-3, -2, -1, 0, 1, 2, 3].map(v => `<label class="pt"><input type="radio" name="q_${s.key}" value="${v}"><span>${v > 0 ? "+" + v : v}</span></label>`).join("");
+    blocks.push(`<div class="q" data-k="q_${s.key}"><div class="qt">${s.text}</div>
+    <div class="likert"><span class="end">${s.left}</span><div class="pts">${pts}</div><span class="end r">${s.right}</span></div></div>`);
+  });
   C.survey.radios.forEach(r => blocks.push(radioQ(r.key, r.text, r.opts)));
   $("#survey").innerHTML = blocks.join("");
-  document.querySelectorAll("#survey input[type=range]").forEach(r => {
-    const mark = () => {
-      r.dataset.touched = "1"; r.closest(".q").classList.remove("missing");
-      const v = +r.value;
-      r.closest(".q").querySelector(".val").textContent = v > 0 ? "+" + v : (v === 0 ? `0（${r.closest(".q").dataset.mid}）` : String(v));
-    };
-    ["input", "change", "pointerdown", "keydown"].forEach(ev => r.addEventListener(ev, mark));
-  });
   document.querySelectorAll("#survey input[type=radio]").forEach(r => r.addEventListener("change", () => r.closest(".q").classList.remove("missing")));
 }
 function collectSurvey(){
