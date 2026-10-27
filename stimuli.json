@@ -961,6 +961,48 @@
   }
  },
  {
+  "id": "dog16_photo_front",
+  "category": "animal",
+  "individual": "dog16",
+  "gender": "na",
+  "style": "photo",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog16_photo_front__sad__none.jpg",
+    "eye": "dog16_photo_front__sad__eye.jpg",
+    "blur": "dog16_photo_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog16_photo_front__smile__none.jpg",
+    "eye": "dog16_photo_front__smile__eye.jpg",
+    "blur": "dog16_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "dog18_photo_front",
+  "category": "animal",
+  "individual": "dog18",
+  "gender": "na",
+  "style": "photo",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog18_photo_front__sad__none.jpg",
+    "eye": "dog18_photo_front__sad__eye.jpg",
+    "blur": "dog18_photo_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog18_photo_front__smile__none.jpg",
+    "eye": "dog18_photo_front__smile__eye.jpg",
+    "blur": "dog18_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
   "id": "dog2_cartoon_front",
   "category": "animal",
   "individual": "dog2",
@@ -1500,6 +1542,44 @@
     "none": "elder2_photo_front__smile__none.jpg",
     "eye": "elder2_photo_front__smile__eye.jpg",
     "blur": "elder2_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder30_painting_side",
+  "category": "elder",
+  "individual": "elder30",
+  "gender": "male",
+  "style": "painting",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder30_painting_side__sad__none.jpg",
+    "eye": "elder30_painting_side__sad__eye.jpg",
+    "blur": "elder30_painting_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder30_painting_side__smile__none.jpg",
+    "eye": "elder30_painting_side__smile__eye.jpg",
+    "blur": "elder30_painting_side__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder32_cartoon_front",
+  "category": "elder",
+  "individual": "elder32",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "elder32_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "elder32_cartoon_front__smile__none.jpg"
    }
   }
  },
