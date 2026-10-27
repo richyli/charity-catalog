@@ -12,6 +12,7 @@ window.ABI_CONFIG = {
   perDonation: 100,
   maxPages: 30,           // 翻頁上限；到上限仍未捐完就結束並記錄餘額
   minAnswerSec: 3,        // 每頁最短停留秒數，未到前按鈕鎖住
+  skipMinSec: 5,          // 「這一頁都不捐」至少 5 秒後才能按（2026-10-27）
   cardsPerPage: 3,
   trapAfterPage: 2,       // 第幾個正式頁之後插入注意力檢核頁
   repeatSourcePage: 2,    // 重複檢核：重現第幾個正式頁（左右順序反轉）

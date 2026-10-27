@@ -225,7 +225,7 @@ const $ = s => document.querySelector(s);
 const QS = C.endpoint ? new URLSearchParams() : new URLSearchParams(location.search);
 const DEBUG = QS.has("debug");
 const FORCE_ARM = QS.get("arm");
-if (QS.has("fast")) C.minAnswerSec = 0;
+if (QS.has("fast")) { C.minAnswerSec = 0; C.skipMinSec = 0; }
 const rnd = n => Math.floor(Math.random() * n);
 const pick = a => a[rnd(a.length)];
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rnd(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
@@ -331,14 +331,18 @@ function renderPage(){
   btns.forEach(b => b.disabled = true);
   S.shownAt = performance.now();
   clearInterval(S.timer);
-  let left = C.minAnswerSec;
+  // 捐款鈕 minAnswerSec 秒後可按；「都不捐」要等 skipMinSec 秒（2026-10-27 使用者：跳過至少 5 秒）
+  const donateBtns = [...document.querySelectorAll(".donate")];
+  const tDonate = C.minAnswerSec, tSkip = Math.max(C.minAnswerSec, C.skipMinSec ?? C.minAnswerSec);
+  let t = 0;
   const label = "這一頁都不捐，看下一頁 →";
   const tick = () => {
-    if (left <= 0) { clearInterval(S.timer); btns.forEach(b => b.disabled = false); skip.textContent = label; }
-    else skip.textContent = `請先看看這一頁（${left}）`;
+    if (t >= tDonate) donateBtns.forEach(b => b.disabled = false);
+    if (t >= tSkip) { clearInterval(S.timer); skip.disabled = false; skip.textContent = label; }
+    else skip.textContent = t >= tDonate ? `看完這一頁才能跳過（${tSkip - t}）` : `請先看看這一頁（${tSkip - t}）`;
   };
   tick();
-  if (left > 0) S.timer = setInterval(() => { left--; tick(); }, 1000);
+  if (tSkip > 0) S.timer = setInterval(() => { t++; tick(); }, 1000);
   document.querySelectorAll(".donate").forEach(b => b.onclick = () => answer(+b.dataset.i));
   document.querySelectorAll(".donate").forEach(b => b.parentElement.addEventListener("click", () => {
     if (b.disabled) { skip.classList.remove("flash"); void skip.offsetWidth; skip.classList.add("flash"); }
@@ -456,7 +460,7 @@ function payload(survey){
     startedAt: S.startedAt, endedAt: new Date().toISOString(),
     durationSec: Math.round((Date.now() - Date.parse(S.startedAt)) / 1000),
     endReason: S.endReason, nPages: S.pages.length, nDonations: S.nDon, leftover: S.balance,
-    minAnswerSec: C.minAnswerSec, maxPages: C.maxPages, reusedImg: S.reusedImg,
+    minAnswerSec: C.minAnswerSec, skipMinSec: C.skipMinSec ?? C.minAnswerSec, maxPages: C.maxPages, reusedImg: S.reusedImg,
     trap_pass: trap ? trap.pass : "na", trap_rtMs: trap ? trap.rtMs : "",
     rep_of: rep ? C.repeatSourcePage : "na", rep_orig: chosenImg(repSrc), rep_again: rep ? chosenImg(rep) : "na",
     rep_consistent: rep ? (chosenImg(repSrc) === chosenImg(rep) ? "yes" : "no") : "na", rep_rtMs: rep ? rep.rtMs : "",
