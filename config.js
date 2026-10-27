@@ -1,8 +1,8 @@
 // ABI 模擬捐款網站設定。改設計只改這個檔。
 window.ABI_CONFIG = {
   // SheetMonkey form URL；空字串＝測試模式（結尾提供下載作答 JSON，不上傳）
-  // 正式上線時把下一行改成 "https://api.sheetmonkey.io/form/xdhTctRLicep3jxGEjBi2V"（2026-10-26 已實測回 200）
-  endpoint: "",
+  // 2026-10-27 正式上線
+  endpoint: "https://api.sheetmonkey.io/form/xdhTctRLicep3jxGEjBi2V",
   // 研究者與倫理審查窗口；正式施測前由研究者填入（留空則不顯示）
   contactEmail: "",
   ethicsContact: "",

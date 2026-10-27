@@ -188,9 +188,10 @@ button{font-family:inherit}
 
 <section id="s-end" class="wrap" hidden>
   <div class="panel">
-    <h1>謝謝你的參與</h1>
+    <h1>感謝您的參與</h1>
     <p id="end-status"></p>
-    <p><b>研究說明：</b>剛才的捐款平台、募款專案、組織名稱與勸募字號都是虛構的，所有圖片都由 AI 生成，畫面中的人物與動物並不存在。部分圖片有標示 AI 生成、部分沒有，部分做了遮臉處理，這些差異是研究要比較的條件。你沒有捐出任何真實的金錢。</p>
+    <p><b>研究說明：</b>剛才的捐款平台、募款專案、組織名稱與勸募字號都是虛構的。所有圖片都由 AI 生成，畫面中的人物與動物並不存在，並沒有使用真實照片。</p>
+    <p>本研究由研究者獨自規劃、執行，沒有任何贊助與合作，但之後的報告會對非營利組織募款有幫助。</p>
     <p id="contact"></p>
     <div id="end-extra"></div>
     <p class="sign">政大新聞 李怡志</p>
@@ -451,7 +452,7 @@ async function submit(){
   try {
     const r = await fetch(C.endpoint, { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data) });
     if (!r.ok) throw new Error(r.status);
-    $("#end-status").textContent = "你的作答已經送出。";
+    $("#end-status").hidden = true;
   } catch (e) {
     $("#end-status").textContent = "作答上傳失敗，請下載作答資料後寄給研究者" + (C.contactEmail ? `（${C.contactEmail}）` : "") + "。";
     download(data);

@@ -3,3 +3,5 @@ UX_REVIEW.md
 build_stimuli.py
 boxes_extra.json
 __pycache__/
+gen_remaining.ps1
+auto_boxes.py
