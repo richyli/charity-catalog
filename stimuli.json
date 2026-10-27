@@ -632,6 +632,23 @@
   }
  },
  {
+  "id": "child39_cartoon_front",
+  "category": "child",
+  "individual": "child39",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "child39_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "child39_cartoon_front__smile__none.jpg"
+   }
+  }
+ },
+ {
   "id": "child3_photo_front",
   "category": "child",
   "individual": "child3",
@@ -666,6 +683,23 @@
    },
    "smile": {
     "none": "child40_cartoon_side__smile__none.jpg"
+   }
+  }
+ },
+ {
+  "id": "child41_cartoon_front",
+  "category": "child",
+  "individual": "child41",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "child41_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "child41_cartoon_front__smile__none.jpg"
    }
   }
  },
@@ -851,6 +885,40 @@
   }
  },
  {
+  "id": "dog10_cartoon_front",
+  "category": "animal",
+  "individual": "dog10",
+  "gender": "na",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "dog10_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "dog10_cartoon_front__smile__none.jpg"
+   }
+  }
+ },
+ {
+  "id": "dog11_cartoon_side",
+  "category": "animal",
+  "individual": "dog11",
+  "gender": "na",
+  "style": "cartoon",
+  "orientation": "side",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "dog11_cartoon_side__sad__none.jpg"
+   },
+   "smile": {
+    "none": "dog11_cartoon_side__smile__none.jpg"
+   }
+  }
+ },
+ {
   "id": "dog2_cartoon_front",
   "category": "animal",
   "individual": "dog2",
@@ -990,6 +1058,65 @@
     "none": "dog6_painting_front__smile__none.jpg",
     "eye": "dog6_painting_front__smile__eye.jpg",
     "blur": "dog6_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "dog7_painting_front",
+  "category": "animal",
+  "individual": "dog7",
+  "gender": "na",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog7_painting_front__sad__none.jpg",
+    "eye": "dog7_painting_front__sad__eye.jpg",
+    "blur": "dog7_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog7_painting_front__smile__none.jpg",
+    "eye": "dog7_painting_front__smile__eye.jpg",
+    "blur": "dog7_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "dog8_painting_side",
+  "category": "animal",
+  "individual": "dog8",
+  "gender": "na",
+  "style": "painting",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog8_painting_side__sad__none.jpg",
+    "eye": "dog8_painting_side__sad__eye.jpg",
+    "blur": "dog8_painting_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog8_painting_side__smile__none.jpg",
+    "eye": "dog8_painting_side__smile__eye.jpg",
+    "blur": "dog8_painting_side__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "dog9_cartoon_front",
+  "category": "animal",
+  "individual": "dog9",
+  "gender": "na",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "dog9_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "dog9_cartoon_front__smile__none.jpg"
    }
   }
  },
@@ -1146,6 +1273,90 @@
     "none": "elder16_photo_front__smile__none.jpg",
     "eye": "elder16_photo_front__smile__eye.jpg",
     "blur": "elder16_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder18_photo_front",
+  "category": "elder",
+  "individual": "elder18",
+  "gender": "male",
+  "style": "photo",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder18_photo_front__sad__none.jpg",
+    "eye": "elder18_photo_front__sad__eye.jpg",
+    "blur": "elder18_photo_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder18_photo_front__smile__none.jpg",
+    "eye": "elder18_photo_front__smile__eye.jpg",
+    "blur": "elder18_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder20_photo_side",
+  "category": "elder",
+  "individual": "elder20",
+  "gender": "male",
+  "style": "photo",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder20_photo_side__sad__none.jpg",
+    "eye": "elder20_photo_side__sad__eye.jpg",
+    "blur": "elder20_photo_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder20_photo_side__smile__none.jpg",
+    "eye": "elder20_photo_side__smile__eye.jpg",
+    "blur": "elder20_photo_side__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder22_painting_front",
+  "category": "elder",
+  "individual": "elder22",
+  "gender": "male",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder22_painting_front__sad__none.jpg",
+    "eye": "elder22_painting_front__sad__eye.jpg",
+    "blur": "elder22_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder22_painting_front__smile__none.jpg",
+    "eye": "elder22_painting_front__smile__eye.jpg",
+    "blur": "elder22_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder24_painting_side",
+  "category": "elder",
+  "individual": "elder24",
+  "gender": "male",
+  "style": "painting",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder24_painting_side__sad__none.jpg",
+    "eye": "elder24_painting_side__sad__eye.jpg",
+    "blur": "elder24_painting_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder24_painting_side__smile__none.jpg",
+    "eye": "elder24_painting_side__smile__eye.jpg",
+    "blur": "elder24_painting_side__smile__blur.jpg"
    }
   }
  },
