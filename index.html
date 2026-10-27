@@ -88,6 +88,8 @@ button{font-family:inherit}
 .val{font-size:13px;color:var(--muted);text-align:center}
 .likert{display:grid;grid-template-columns:4.5em 1fr 4.5em;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
 .likert .r{text-align:right}
+.q.grp{padding-bottom:6px}
+.q.sub{border-bottom:0;padding:6px 0}
 .pts{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .pt{display:flex;cursor:pointer}
 .pt input{position:absolute;opacity:0;pointer-events:none}
@@ -374,10 +376,21 @@ function radioQ(k, text, opts){
 function buildSurvey(){
   const blocks = [];
   blocks.push(`<div class="q"><div class="qt" style="font-weight:400;color:var(--muted)">以下每一題，請點選最符合你看法的位置；越靠兩端表示越強烈。</div></div>`);
-  shuffle(C.survey.sliders).forEach(s => {
+  // 同一題幹的題目（如 AI 態度 3 題）排在一起、題幹只出現一次；題組之間亂序，組內也亂序
+  const groups = [];
+  C.survey.sliders.forEach(s => { const g = groups.find(x => x.text === s.text); g ? g.items.push(s) : groups.push({ text: s.text, items: [s] }); });
+  const scale = s => {
     const pts = [-3, -2, -1, 0, 1, 2, 3].map(v => `<label class="pt"><input type="radio" name="q_${s.key}" value="${v}"><span>${v > 0 ? "+" + v : v}</span></label>`).join("");
-    blocks.push(`<div class="q" data-k="q_${s.key}"><div class="qt">${s.text}</div>
-    <div class="likert"><span class="end">${s.left}</span><div class="pts">${pts}</div><span class="end r">${s.right}</span></div></div>`);
+    return `<div class="likert"><span class="end">${s.left}</span><div class="pts">${pts}</div><span class="end r">${s.right}</span></div>`;
+  };
+  shuffle(groups).forEach(g => {
+    if (g.items.length === 1) {
+      const s = g.items[0];
+      blocks.push(`<div class="q" data-k="q_${s.key}"><div class="qt">${s.text}</div>${scale(s)}</div>`);
+    } else {
+      blocks.push(`<div class="q grp"><div class="qt">${g.text}</div>` +
+        shuffle(g.items).map(s => `<div class="q sub" data-k="q_${s.key}">${scale(s)}</div>`).join("") + `</div>`);
+    }
   });
   C.survey.radios.forEach(r => blocks.push(radioQ(r.key, r.text, r.opts)));
   $("#survey").innerHTML = blocks.join("");
