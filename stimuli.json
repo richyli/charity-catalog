@@ -1024,6 +1024,90 @@
   }
  },
  {
+  "id": "dog22_painting_front",
+  "category": "animal",
+  "individual": "dog22",
+  "gender": "na",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog22_painting_front__sad__none.jpg",
+    "eye": "dog22_painting_front__sad__eye.jpg",
+    "blur": "dog22_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog22_painting_front__smile__none.jpg",
+    "eye": "dog22_painting_front__smile__eye.jpg",
+    "blur": "dog22_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "dog24_painting_side",
+  "category": "animal",
+  "individual": "dog24",
+  "gender": "na",
+  "style": "painting",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog24_painting_side__sad__none.jpg",
+    "eye": "dog24_painting_side__sad__eye.jpg",
+    "blur": "dog24_painting_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog24_painting_side__smile__none.jpg",
+    "eye": "dog24_painting_side__smile__eye.jpg",
+    "blur": "dog24_painting_side__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "dog26_painting_front",
+  "category": "animal",
+  "individual": "dog26",
+  "gender": "na",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog26_painting_front__sad__none.jpg",
+    "eye": "dog26_painting_front__sad__eye.jpg",
+    "blur": "dog26_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog26_painting_front__smile__none.jpg",
+    "eye": "dog26_painting_front__smile__eye.jpg",
+    "blur": "dog26_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "dog28_painting_front",
+  "category": "animal",
+  "individual": "dog28",
+  "gender": "na",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog28_painting_front__sad__none.jpg",
+    "eye": "dog28_painting_front__sad__eye.jpg",
+    "blur": "dog28_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog28_painting_front__smile__none.jpg",
+    "eye": "dog28_painting_front__smile__eye.jpg",
+    "blur": "dog28_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
   "id": "dog2_cartoon_front",
   "category": "animal",
   "individual": "dog2",
@@ -1079,6 +1163,27 @@
     "none": "dog2_photo_side__smile__none.jpg",
     "eye": "dog2_photo_side__smile__eye.jpg",
     "blur": "dog2_photo_side__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "dog30_painting_side",
+  "category": "animal",
+  "individual": "dog30",
+  "gender": "na",
+  "style": "painting",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog30_painting_side__sad__none.jpg",
+    "eye": "dog30_painting_side__sad__eye.jpg",
+    "blur": "dog30_painting_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog30_painting_side__smile__none.jpg",
+    "eye": "dog30_painting_side__smile__eye.jpg",
+    "blur": "dog30_painting_side__smile__blur.jpg"
    }
   }
  },
@@ -1340,6 +1445,27 @@
   }
  },
  {
+  "id": "elder13_photo_front",
+  "category": "elder",
+  "individual": "elder13",
+  "gender": "female",
+  "style": "photo",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder13_photo_front__sad__none.jpg",
+    "eye": "elder13_photo_front__sad__eye.jpg",
+    "blur": "elder13_photo_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder13_photo_front__smile__none.jpg",
+    "eye": "elder13_photo_front__smile__eye.jpg",
+    "blur": "elder13_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
   "id": "elder14_photo_side",
   "category": "elder",
   "individual": "elder14",
@@ -1361,6 +1487,27 @@
   }
  },
  {
+  "id": "elder15_photo_front",
+  "category": "elder",
+  "individual": "elder15",
+  "gender": "female",
+  "style": "photo",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder15_photo_front__sad__none.jpg",
+    "eye": "elder15_photo_front__sad__eye.jpg",
+    "blur": "elder15_photo_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder15_photo_front__smile__none.jpg",
+    "eye": "elder15_photo_front__smile__eye.jpg",
+    "blur": "elder15_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
   "id": "elder16_photo_front",
   "category": "elder",
   "individual": "elder16",
@@ -1378,6 +1525,27 @@
     "none": "elder16_photo_front__smile__none.jpg",
     "eye": "elder16_photo_front__smile__eye.jpg",
     "blur": "elder16_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder17_photo_side",
+  "category": "elder",
+  "individual": "elder17",
+  "gender": "female",
+  "style": "photo",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder17_photo_side__sad__none.jpg",
+    "eye": "elder17_photo_side__sad__eye.jpg",
+    "blur": "elder17_photo_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder17_photo_side__smile__none.jpg",
+    "eye": "elder17_photo_side__smile__eye.jpg",
+    "blur": "elder17_photo_side__smile__blur.jpg"
    }
   }
  },
@@ -1622,6 +1790,40 @@
   }
  },
  {
+  "id": "elder36_cartoon_front",
+  "category": "elder",
+  "individual": "elder36",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "elder36_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "elder36_cartoon_front__smile__none.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder38_cartoon_front",
+  "category": "elder",
+  "individual": "elder38",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "front",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "elder38_cartoon_front__sad__none.jpg"
+   },
+   "smile": {
+    "none": "elder38_cartoon_front__smile__none.jpg"
+   }
+  }
+ },
+ {
   "id": "elder3_photo_front",
   "category": "elder",
   "individual": "elder3",
@@ -1639,6 +1841,23 @@
     "none": "elder3_photo_front__smile__none.jpg",
     "eye": "elder3_photo_front__smile__eye.jpg",
     "blur": "elder3_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder40_cartoon_side",
+  "category": "elder",
+  "individual": "elder40",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "side",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "elder40_cartoon_side__sad__none.jpg"
+   },
+   "smile": {
+    "none": "elder40_cartoon_side__smile__none.jpg"
    }
   }
  },
