@@ -3,7 +3,7 @@ window.ABI_CONFIG = {
   // SheetMonkey form URL；空字串＝測試模式（結尾提供下載作答 JSON，不上傳）
   // 2026-10-27 正式上線
   endpoint: "https://api.sheetmonkey.io/form/xdhTctRLicep3jxGEjBi2V",
-  surveyVersion: 3,      // 1＝上線初版（AI 態度 1 題）；2＝AI 態度 3 題自擬版（約 12:34–12:50）；3＝AI 態度 3 題依 TPB 文獻建構
+  surveyVersion: 4,      // 1＝上線初版（AI 態度 1 題）；2＝自擬 3 題；3＝TPB 3 題；4＝改編 Arango et al. (2023) AtIm 3 題
   // 研究者與倫理審查窗口；正式施測前由研究者填入（留空則不顯示）
   contactEmail: "",
   ethicsContact: "",
@@ -54,11 +54,12 @@ window.ABI_CONFIG = {
       // 信任與訴求方式：調節揭露、表情、遮臉
       { key: "npo_trust",    text: "對公益團體", left: "不信任", right: "信任" },
       { key: "appeal_pity",  text: "以悲慘不幸的影像來募款", left: "反對", right: "支持" },
-      // AI 態度 3 題（surveyVersion 3 起）：依 TPB 直接態度測量法建構——同一題幹＋評價性雙極形容詞，
-      // 含整體評價 good–bad 與工具性 harmful–beneficial、worthless–useful（Francis et al., 2004, §5.1；Ajzen, 1991）
-      { key: "ai_good",       text: "公益團體在募款中使用 AI 生成的受助者影像", left: "不好", right: "好" },
-      { key: "ai_beneficial", text: "公益團體在募款中使用 AI 生成的受助者影像", left: "有害", right: "有益" },
-      { key: "ai_useful",     text: "公益團體在募款中使用 AI 生成的受助者影像", left: "沒有用", right: "有用" },
+      // AI 態度 3 題（surveyVersion 4 起）：改編 Arango, Singaraju & Niininen (2023, J. Advertising) 的
+      // 「對公益團體使用 AI 影像的態度」AtIm（Bad/Good、Unfavorable/Favorable，α=.97），第三題取同源量表
+      // Goldsmith, Lafferty & Newell (2000) 的 Unpleasant/Pleasant（Arango 等人用於廣告態度）
+      { key: "ai_good",      text: "公益團體在募款中使用 AI 生成的受助者影像", left: "不好", right: "好" },
+      { key: "ai_favorable", text: "公益團體在募款中使用 AI 生成的受助者影像", left: "負面", right: "正面" },
+      { key: "ai_pleasant",  text: "公益團體在募款中使用 AI 生成的受助者影像", left: "不愉快", right: "愉快" },
       { key: "appeal_privacy", text: "募款影像中受助者的隱私", left: "不在意", right: "很在意" },
       // 共同方法變異 marker
       { key: "marker_blue",  text: "藍色", left: "不喜歡", right: "喜歡" }
