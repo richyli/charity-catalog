@@ -919,6 +919,48 @@
   }
  },
  {
+  "id": "dog12_photo_front",
+  "category": "animal",
+  "individual": "dog12",
+  "gender": "na",
+  "style": "photo",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog12_photo_front__sad__none.jpg",
+    "eye": "dog12_photo_front__sad__eye.jpg",
+    "blur": "dog12_photo_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog12_photo_front__smile__none.jpg",
+    "eye": "dog12_photo_front__smile__eye.jpg",
+    "blur": "dog12_photo_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "dog14_photo_side",
+  "category": "animal",
+  "individual": "dog14",
+  "gender": "na",
+  "style": "photo",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog14_photo_side__sad__none.jpg",
+    "eye": "dog14_photo_side__sad__eye.jpg",
+    "blur": "dog14_photo_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog14_photo_side__smile__none.jpg",
+    "eye": "dog14_photo_side__smile__eye.jpg",
+    "blur": "dog14_photo_side__smile__blur.jpg"
+   }
+  }
+ },
+ {
   "id": "dog2_cartoon_front",
   "category": "animal",
   "individual": "dog2",
@@ -1357,6 +1399,48 @@
     "none": "elder24_painting_side__smile__none.jpg",
     "eye": "elder24_painting_side__smile__eye.jpg",
     "blur": "elder24_painting_side__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder26_painting_front",
+  "category": "elder",
+  "individual": "elder26",
+  "gender": "male",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder26_painting_front__sad__none.jpg",
+    "eye": "elder26_painting_front__sad__eye.jpg",
+    "blur": "elder26_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder26_painting_front__smile__none.jpg",
+    "eye": "elder26_painting_front__smile__eye.jpg",
+    "blur": "elder26_painting_front__smile__blur.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder28_painting_front",
+  "category": "elder",
+  "individual": "elder28",
+  "gender": "male",
+  "style": "painting",
+  "orientation": "front",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "elder28_painting_front__sad__none.jpg",
+    "eye": "elder28_painting_front__sad__eye.jpg",
+    "blur": "elder28_painting_front__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "elder28_painting_front__smile__none.jpg",
+    "eye": "elder28_painting_front__smile__eye.jpg",
+    "blur": "elder28_painting_front__smile__blur.jpg"
    }
   }
  },
