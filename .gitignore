@@ -5,3 +5,4 @@ boxes_extra.json
 __pycache__/
 gen_remaining.ps1
 auto_boxes.py
+make_og.py
