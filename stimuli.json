@@ -1003,6 +1003,27 @@
   }
  },
  {
+  "id": "dog20_photo_side",
+  "category": "animal",
+  "individual": "dog20",
+  "gender": "na",
+  "style": "photo",
+  "orientation": "side",
+  "maskable": true,
+  "variants": {
+   "sad": {
+    "none": "dog20_photo_side__sad__none.jpg",
+    "eye": "dog20_photo_side__sad__eye.jpg",
+    "blur": "dog20_photo_side__sad__blur.jpg"
+   },
+   "smile": {
+    "none": "dog20_photo_side__smile__none.jpg",
+    "eye": "dog20_photo_side__smile__eye.jpg",
+    "blur": "dog20_photo_side__smile__blur.jpg"
+   }
+  }
+ },
+ {
   "id": "dog2_cartoon_front",
   "category": "animal",
   "individual": "dog2",
@@ -1580,6 +1601,23 @@
    },
    "smile": {
     "none": "elder32_cartoon_front__smile__none.jpg"
+   }
+  }
+ },
+ {
+  "id": "elder34_cartoon_side",
+  "category": "elder",
+  "individual": "elder34",
+  "gender": "male",
+  "style": "cartoon",
+  "orientation": "side",
+  "maskable": false,
+  "variants": {
+   "sad": {
+    "none": "elder34_cartoon_side__sad__none.jpg"
+   },
+   "smile": {
+    "none": "elder34_cartoon_side__smile__none.jpg"
    }
   }
  },
