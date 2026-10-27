@@ -405,7 +405,7 @@ function payload(survey){
   const repSrc = S.pages.filter(p => p.type === "normal")[C.repeatSourcePage - 1];
   const chosenImg = p => p && p.choice > 0 ? p.cards[p.choice - 1].img : "skip";
   const d = {
-    pid: S.pid, arm: S.arm, category: S.arm === "select" ? S.category : "mixed",
+    pid: S.pid, surveyVersion: C.surveyVersion || 1, arm: S.arm, category: S.arm === "select" ? S.category : "mixed",
     device: window.innerWidth <= 640 ? "mobile" : "desktop",
     startedAt: S.startedAt, endedAt: new Date().toISOString(),
     durationSec: Math.round((Date.now() - Date.parse(S.startedAt)) / 1000),
