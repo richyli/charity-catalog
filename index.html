@@ -100,6 +100,9 @@ button{font-family:inherit}
 .likert .r{text-align:right}
 .q.grp{padding-bottom:6px}
 .q.sub{border-bottom:0;padding:6px 0}
+.q.er{display:grid;grid-template-columns:160px 1fr;gap:14px;align-items:center}
+.erimg{width:160px;height:160px;object-fit:cover;border-radius:10px}
+@media (max-width:640px){.q.er{grid-template-columns:1fr;justify-items:center}.erimg{width:100%;max-width:240px;height:auto;aspect-ratio:1/1}.q.er .likert{width:100%;grid-template-columns:1fr 1fr}}
 .pts{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .pt{display:flex;cursor:pointer}
 .pt input{position:absolute;opacity:0;pointer-events:none}
@@ -383,8 +386,26 @@ function radioQ(k, text, opts){
   return `<div class="q" data-k="${k}"><div class="qt">${text}</div><div class="opts">${
     opts.map(o => `<label><input type="radio" name="${k}" value="${o}"><span>${o}</span></label>`).join("")}</div></div>`;
 }
+// 表情檢核：從受試者沒看過的個體抽 C.emotionCheck.n 張（不含揭露標示），請他判斷情緒
+function pickRateItems(){
+  const seen = new Set(S.pages.flatMap(p => p.cards.map(c => c.img)));
+  const pool = [];
+  STIM.forEach(m => { if (seen.has(m.id)) return; Object.entries(m.variants).forEach(([expr, v]) => Object.keys(v).forEach(mask =>
+    pool.push({ id: m.id, cat: m.category, style: m.style, expr, mask, src: "img/" + v[mask] }))); });
+  const byId = {}; shuffle(pool).forEach(x => { (byId[x.id] = byId[x.id] || []).push(x); });
+  return shuffle(Object.keys(byId)).slice(0, C.emotionCheck.n).map(k => byId[k][0]);
+}
 function buildSurvey(){
   const blocks = [];
+  if (C.emotionCheck && C.emotionCheck.n) {
+    S.rateItems = pickRateItems();
+    blocks.push(`<div class="q"><div class="qt">先請你看幾張圖：圖中的人物或動物看起來是什麼情緒？</div></div>`);
+    S.rateItems.forEach((it, k) => {
+      const pts = [-3, -2, -1, 0, 1, 2, 3].map(v => `<label class="pt"><input type="radio" name="er${k + 1}" value="${v}"><span>${v > 0 ? "+" + v : v}</span></label>`).join("");
+      blocks.push(`<div class="q er" data-k="er${k + 1}_val"><img class="erimg" src="${it.src}" alt="">
+        <div class="likert"><span class="end">很難過</span><div class="pts">${pts}</div><span class="end r">很開心</span></div></div>`);
+    });
+  }
   blocks.push(`<div class="q"><div class="qt" style="font-weight:400;color:var(--muted)">以下每一題，請點選最符合你看法的位置；越靠兩端表示越強烈。</div></div>`);
   // 同一題幹的題目（如 AI 態度 3 題）排在一起、題幹只出現一次；題組之間亂序，組內也亂序
   const groups = [];
@@ -428,7 +449,8 @@ function payload(survey){
   const repSrc = S.pages.filter(p => p.type === "normal")[C.repeatSourcePage - 1];
   const chosenImg = p => p && p.choice > 0 ? p.cards[p.choice - 1].img : "skip";
   const d = {
-    pid: S.pid, surveyVersion: C.surveyVersion || 1, arm: S.arm, category: S.arm === "select" ? S.category : "mixed",
+    pid: S.pid, surveyVersion: C.surveyVersion || 1,
+    ...Object.fromEntries((S.rateItems || []).map((it, k) => [`er${k + 1}_img`, [it.cat, it.style, it.expr, it.mask, it.id].join("|")])), arm: S.arm, category: S.arm === "select" ? S.category : "mixed",
     device: window.innerWidth <= 640 ? "mobile" : "desktop",
     startedAt: S.startedAt, endedAt: new Date().toISOString(),
     durationSec: Math.round((Date.now() - Date.parse(S.startedAt)) / 1000),

@@ -3,7 +3,8 @@ window.ABI_CONFIG = {
   // SheetMonkey form URL；空字串＝測試模式（結尾提供下載作答 JSON，不上傳）
   // 2026-10-27 正式上線
   endpoint: "https://api.sheetmonkey.io/form/xdhTctRLicep3jxGEjBi2V",
-  surveyVersion: 4,      // 1＝上線初版（AI 態度 1 題）；2＝自擬 3 題；3＝TPB 3 題；4＝改編 Arango et al. (2023) AtIm 3 題
+  surveyVersion: 5,      // 1＝上線初版（AI 態度 1 題）；2＝自擬 3 題；3＝TPB 3 題；4＝改編 Arango et al. (2023) AtIm 3 題；5＝加表情檢核
+  emotionCheck: { n: 4 }, // 問卷開頭請受試者評 4 張沒看過個體的情緒（−3 很難過到 +3 很開心），作為表情操弄檢核
   // 研究者與倫理審查窗口；正式施測前由研究者填入（留空則不顯示）
   contactEmail: "",
   ethicsContact: "",
