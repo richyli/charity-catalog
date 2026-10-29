@@ -50,8 +50,10 @@ button{font-family:inherit}
 .donecount{font-size:13px;color:var(--muted)}
 .dots i.on{background:var(--brand)}
 .topline{display:flex;justify-content:space-between;align-items:center;margin:4px 0 12px;color:var(--muted);font-size:14px}
-.alert{background:#fdecea;color:#c62828;border:1px solid #f5b5ae;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-weight:700;animation:blink 1s steps(2,start) 3}
-@keyframes blink{50%{opacity:.35}}
+.alert{background:#fdecea;color:#c62828;border:1px solid #f5b5ae;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-weight:700;animation:blink 1s steps(2,start) infinite}
+@keyframes blink{50%{opacity:.2}}
+/* 注意力檢核：說明條與檢核卡標題持續閃爍紅字（2026-10-29）；減少動態偏好者改為靜態紅字 */
+@media (prefers-reduced-motion: reduce){.alert,.title.trap-title{animation:none}}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 auto;max-width:min(1088px, calc((100dvh - 340px) * 3 + 32px))}
 .grid.trap{max-width:min(1088px, calc((100dvh - 400px) * 3 + 32px))}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
@@ -72,7 +74,7 @@ button{font-family:inherit}
 .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
 .title{font-size:16px;font-weight:700;line-height:1.4}
 .title .sub{display:block;font-weight:500;font-size:.92em}
-.title.trap-title{color:#c62828}
+.title.trap-title{color:#c62828;animation:blink 1s steps(2,start) infinite}
 .org{font-size:13px;color:var(--muted)}
 .permit{font-size:12px;color:var(--muted)}
 .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:6px}
