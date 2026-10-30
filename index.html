@@ -75,6 +75,9 @@ button{font-family:inherit}
 .title{font-size:16px;font-weight:700;line-height:1.4}
 .title .sub{display:block;font-weight:500;font-size:.92em}
 .title.trap-title{color:#c62828;animation:blink 1s steps(2,start) infinite}
+/* 2026-10-30 使用者：注意力檢核卡的捐款鈕也改紅色 */
+.btn.donate.trap-btn{background:#c62828;color:#fff}
+.btn.donate.trap-btn:disabled{background:#f2b8b5;color:#7a1f1a}
 .org{font-size:13px;color:var(--muted)}
 .permit{font-size:12px;color:var(--muted)}
 .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:6px}
@@ -153,7 +156,7 @@ button{font-family:inherit}
   .panel{padding:18px;margin:12px 0}
 }
 </style>
-<script src="config.js?v=20261029"></script>
+<script src="config.js?v=20261030b"></script>
 </head>
 <body>
 
@@ -257,21 +260,25 @@ function leastUsed(n, use, exclude){
   use[i] = (use[i] || 0) + 1; exclude.add(i); return i;
 }
 
-function pickImage(cat, style, expr, gender, avoid){
-  const ok = m => m.category === cat && m.variants[expr] && (gender === "na" || m.gender === gender);
+function pickImage(cat, style, expr, gender, bg, fur, warm, avoid){
+  // 2026-10-30：背景是隨機屬性；同一頁不出現同一個角色（改圖產生的同角色不同背景也算同一個）
+  const ok = m => m.category === cat && m.variants[expr] && (gender === "na" || m.gender === gender) && m.bg === bg && (fur === "na" || m.fur === fur) && (warm === "na" || m.warm === warm) && !avoid.has(m.individual);
   const pool = STIM.filter(m => ok(m) && m.style === style && !avoid.has(m.id));
   const fresh = pool.filter(m => !S.usedImg.has(m.id));
   let m;
   if (fresh.length) m = pick(fresh);
   else if (pool.length) { m = pick(pool); S.reusedImg++; }
-  else { m = pick(STIM.filter(x => ok(x) && !avoid.has(x.id))) || pick(STIM.filter(ok)); S.reusedImg++; }
+  else { m = pick(STIM.filter(x => ok(x) && !avoid.has(x.id))) || pick(STIM.filter(ok)) || pick(STIM.filter(x => x.category === cat && x.variants[expr] && x.style === style)); S.reusedImg++; }
   S.usedImg.add(m.id); return m;
 }
 function makeCard(cat, style, disclosure, avoid, used){
   const expr = pick(C.levels.expression);
   const gender = cat === "animal" ? "na" : pick(C.levels.gender);
-  const img = pickImage(cat, style, expr, gender, avoid);
-  avoid.add(img.id);
+  const bg = pick(cat === "animal" ? C.levels.bgAnimal : C.levels.bgHuman);
+  const fur = cat === "animal" ? pick(C.levels.furColor) : "na";
+  const warm = cat === "animal" ? "na" : pick(C.levels.clothWarm);
+  const img = pickImage(cat, style, expr, gender, bg, fur, warm, avoid);
+  avoid.add(img.id); avoid.add(img.individual);
   const mask = img.maskable ? pick(C.levels.mask) : "na";
   return { cat, gender, style: img.style, expr, disclosure, mask, img: img.id,
            src: "img/" + img.variants[expr][mask === "na" ? "none" : mask],
@@ -325,7 +332,7 @@ function renderPage(){
         <div class="org">${C.orgs[c.org]}</div>
         <div class="permit">勸募字號：${PERMIT[c.org]}</div>
         ${DEBUG ? `<div class="debug">${cardCode(c)}</div>` : ""}
-        <div class="row"><span class="amt">$${C.perDonation}</span><button class="btn donate" data-i="${i + 1}" disabled>捐款</button></div>
+        <div class="row"><span class="amt">$${C.perDonation}</span><button class="btn donate${c.trap ? " trap-btn" : ""}" data-i="${i + 1}" disabled>捐款</button></div>
       </div></article>`;
   }).join("");
   const skip = $("#btn-skip");
@@ -395,9 +402,10 @@ function radioQ(k, text, opts){
 }
 // 表情檢核：從受試者沒看過的個體抽 C.emotionCheck.n 張（不含揭露標示），請他判斷情緒
 function pickRateItems(){
-  const seen = new Set(S.pages.flatMap(p => p.cards.map(c => c.img)));
+  // 2026-10-30：以角色判斷「沒看過」（改圖產生的同角色不同背景也算看過）；停用背景（中間、室內犬舍）的底圖照樣可抽，延續既有評分
+  const seen = new Set(S.pages.flatMap(p => p.cards.map(c => (STIM.find(m => m.id === c.img) || {}).individual || c.img)));
   const pool = [];
-  STIM.forEach(m => { if (seen.has(m.id)) return; Object.entries(m.variants).forEach(([expr, v]) => Object.keys(v).forEach(mask =>
+  STIM.forEach(m => { if (seen.has(m.individual)) return; Object.entries(m.variants).forEach(([expr, v]) => Object.keys(v).forEach(mask =>
     pool.push({ id: m.id, cat: m.category, style: m.style, expr, mask, src: "img/" + v[mask] }))); });
   const byId = {}; shuffle(pool).forEach(x => { (byId[x.id] = byId[x.id] || []).push(x); });
   return shuffle(Object.keys(byId)).slice(0, C.emotionCheck.n).map(k => byId[k][0]);
@@ -462,7 +470,7 @@ function payload(survey){
     startedAt: S.startedAt, endedAt: new Date().toISOString(),
     durationSec: Math.round((Date.now() - Date.parse(S.startedAt)) / 1000),
     endReason: S.endReason, nPages: S.pages.length, nDonations: S.nDon, leftover: S.balance,
-    minAnswerSec: C.minAnswerSec, skipMinSec: C.skipMinSec ?? C.minAnswerSec, maxPages: C.maxPages, reusedImg: S.reusedImg,
+    stimVersion: C.stimVersion || "", minAnswerSec: C.minAnswerSec, skipMinSec: C.skipMinSec ?? C.minAnswerSec, maxPages: C.maxPages, reusedImg: S.reusedImg,
     trap_pass: trap ? trap.pass : "na", trap_rtMs: trap ? trap.rtMs : "",
     rep_of: rep ? C.repeatSourcePage : "na", rep_orig: chosenImg(repSrc), rep_again: rep ? chosenImg(rep) : "na",
     rep_consistent: rep ? (chosenImg(repSrc) === chosenImg(rep) ? "yes" : "no") : "na", rep_rtMs: rep ? rep.rtMs : "",
@@ -511,7 +519,7 @@ async function submit(){
   }
 }
 
-fetch("stimuli.json").then(r => r.json()).then(m => { STIM = m; }).catch(() => { $("#btn-start").disabled = true; $("#btn-start").textContent = "載入失敗，請重新整理"; });
+fetch("stimuli.json?v=20261030").then(r => r.json()).then(m => { STIM = m; }).catch(() => { $("#btn-start").disabled = true; $("#btn-start").textContent = "載入失敗，請重新整理"; });
 $("#cats").innerHTML = shuffle(C.categories).map(c => `<button class="cat" data-k="${c.key}"><b>${c.label}</b><span>${c.desc}</span></button>`).join("");
 document.querySelectorAll(".cat").forEach(b => b.onclick = () => { S.category = b.dataset.k; show("s-page"); next(); });
 $("#btn-start").onclick = () => {

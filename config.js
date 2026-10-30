@@ -12,6 +12,7 @@ window.ABI_CONFIG = {
   perDonation: 100,
   maxPages: 30,           // 翻頁上限；到上限仍未捐完就結束並記錄餘額
   minAnswerSec: 3,        // 每頁最短停留秒數，未到前按鈕鎖住
+  stimVersion: "bg1",     // 2026-10-30 背景隨機化後的刺激物版本，寫進 payload
   skipMinSec: 7,          // 「這一頁都不捐」至少 7 秒後才能按（2026-10-27 起 5 秒；2026-10-29 改 7 秒）
   cardsPerPage: 3,
   trapAfterPage: 2,       // 第幾個正式頁之後插入注意力檢核頁
@@ -31,7 +32,12 @@ window.ABI_CONFIG = {
     discSize: ["small", "large"],
     mask: ["none", "eye", "blur"],  // 2026-10-26 使用者：三水準，眼部與全臉都用薄碼（看得出表情）
     expression: ["sad", "smile"],  // 2026-10-26 使用者選定；微笑版由同一張圖編輯而來
-    gender: ["female", "male"]     // 2026-10-26 使用者選定；只用於人（兒童、長者），動物記為 na
+    gender: ["female", "male"],    // 2026-10-26 使用者選定；只用於人（兒童、長者），動物記為 na
+    // 2026-10-30 背景改為隨機屬性：人 不窮／窮，狗 舒適／艱困；底圖的背景水準記在 stimuli.json 的 bg（來源 bg_levels.json）
+    bgHuman: ["rich", "poor"],
+    bgAnimal: ["comfort", "harsh"],
+    furColor: ["black", "brown", "mixed", "white"],  // 狗的毛色隨機（使用者：狗沒有性別，顏色 × 背景 × 風格要平均）
+    clothWarm: ["warm", "nonwarm"]   // 人的衣服 暖色／非暖色 隨機（使用者 2026-10-30）
   },
   disclosureText: "AI 生成影像",
   // 專案名稱：「守護、支持、照顧」三詞隨機排序＋「計畫」，共 6 種（使用者 2026-10-26：
